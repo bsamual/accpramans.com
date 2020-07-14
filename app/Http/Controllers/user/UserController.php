@@ -119,8 +119,6 @@ class UserController extends Controller {
 	public function dashboard()
 
 	{
-		echo 'jsdsdhjsdjgds';
-		exit;
 
 		$time_job = DB::table('task_job')->get();
 
