@@ -1,0 +1,5 @@
+1) Codeing Intergation. Add Production Member admin and Agency, Api
+2) Admin, Agecy, Production -> Production Id change to user_id
+3) API
+
+1) Database Alteartion

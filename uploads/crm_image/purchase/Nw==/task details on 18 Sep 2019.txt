@@ -1,0 +1,5 @@
+1. payep30 show all --> takes more time
+2. payep30 Update all --> New functionality
+3. payep30 Richard--> 101--> difference for ros and task liability wrong.
+4. Quickchits Bugs in client excel sheet
+5. APi WOrk

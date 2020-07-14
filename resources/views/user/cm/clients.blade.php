@@ -1,0 +1,2794 @@
+@extends('userheader')
+@section('content')
+<?php require_once(app_path('Http/helpers.php')); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo URL::to('assets/css/jquery.dataTables.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo URL::to('assets/css/fixedHeader.dataTables.min.css'); ?>">
+
+<script src="<?php echo URL::to('assets/js/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?php echo URL::to('assets/js/dataTables.fixedHeader.min.js'); ?>"></script>
+
+<script src="<?php echo URL::to('assets/js/jquery.form.js'); ?>"></script>
+<script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+<link rel="stylesheet" href="<?php echo URL::to('assets/js/lightbox/colorbox.css'); ?>">
+<script src="<?php echo URL::to('assets/js/lightbox/jquery.colorbox.js'); ?>"></script>
+<style>
+
+body{
+  background: #f5f5f5 !important;
+}
+.form-control[readonly]{
+      background-color: #fff !important
+}
+.formtable tr td{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.fullviewtablelist>tbody>tr>td{
+  font-weight:800 !important;
+  font-size:15px !important;
+}
+.fullviewtablelist>tbody>tr>td a{
+  font-weight:800 !important;
+  font-size:15px !important;
+}
+.modal { overflow: auto !important;z-index: 999999;}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover
+{
+  z-index: 0 !important;
+}
+.ui-tooltip{
+  margin-top:-50px !important;
+}
+.label_class{
+  float:left ;
+  margin-top:15px;
+  font-weight:700;
+}
+.upload_img{
+  position: absolute;
+    top: 0px;
+    z-index: 1;
+    background: rgb(226, 226, 226);
+    padding: 19% 0%;
+    text-align: center;
+    overflow: hidden;
+}
+.upload_text{
+  font-size: 15px;
+    font-weight: 800;
+    color: #631500;
+}
+.field_check
+{
+  width:24%;
+}
+.import_div{
+    position: absolute;
+    top: 55%;
+    left:30%;
+    padding: 15px;
+    background: #ff0;
+    z-index: 999999;
+}
+.selectall_div{
+  position: absolute;
+    top: 13%;
+    left: 5%;
+    border: 1px solid #000;
+    padding: 12px;
+    background: #ff0;
+}
+.modal_load {
+    display:    none;
+    position:   fixed;
+    z-index:    999999;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url(<?php echo URL::to('assets/images/loading.gif'); ?>) 
+                50% 50% 
+                no-repeat;
+}
+body.loading {
+    overflow: hidden;   
+}
+body.loading .modal_load {
+    display: block;
+}
+    .table thead th:focus{background: #ddd !important;}
+    .form-control{border-radius: 0px;}
+    .disabled{cursor :auto !important;pointer-events: auto !important}
+    body #coupon {
+      display: none;
+    }
+    @media print {
+      body * {
+        display: none;
+      }
+      body #coupon {
+        display: block;
+      }
+    }
+</style>
+<script>
+function popitup(url) {
+    newwindow=window.open(url,'name','height=600,width=1500');
+    if (window.focus) {newwindow.focus()}
+    return false;
+}
+
+</script>
+
+<style>
+.error{color: #f00; font-size: 12px;}
+a:hover{text-decoration: underline;}
+</style>
+<?php
+if(!empty($_GET['import_type_new']))
+{
+  if(!empty($_GET['round']))
+  {
+    
+    $filename = $_GET['filename'];
+
+    
+    $height = $_GET['height'];
+    $highestrow = $_GET['highestrow'];
+    $round = $_GET['round'];
+    $out = $_GET['out'];
+
+    ?>
+    <div class="upload_img" style="width: 100%;height: 100%;z-index:1"><p class="upload_text">Uploading Please wait...</p><img src="<?php echo URL::to('assets/loading.gif'); ?>" width="100px" height="100px"><p class="upload_text">Finished Uploading <?php echo $height; ?> of <?php echo $highestrow; ?></p></div>
+
+    <script>
+      $(document).ready(function() {
+        var base_url = "<?php echo URL::to('/'); ?>";
+        window.location.replace(base_url+'/user/import_new_clients_one?filename=<?php echo $filename; ?>&height=<?php echo $height; ?>&round=<?php echo $round; ?>&highestrow=<?php echo $highestrow; ?>&import_type_new=1&out=<?php echo $out; ?>');
+      })
+    </script>
+    <?php
+
+  }
+}
+if(!empty($_GET['import_type_existing']))
+{
+  if(!empty($_GET['round']))
+  {
+    $filename = $_GET['filename'];
+    $height = $_GET['height'];
+    $highestrow = $_GET['highestrow'];
+    $round = $_GET['round'];
+    $out = $_GET['out'];
+    $checkbox = $_GET['checkbox'];
+    ?>
+    <div class="upload_img" style="width: 100%;height: 100%;z-index:1"><p class="upload_text">Uploading Please wait...</p><img src="<?php echo URL::to('assets/loading.gif'); ?>" width="100px" height="100px"><p class="upload_text">Finished Uploading <?php echo $height; ?> of <?php echo $highestrow; ?></p></div>
+
+    <script>
+      $(document).ready(function() {
+        var base_url = "<?php echo URL::to('/'); ?>";
+        window.location.replace(base_url+'/user/import_existing_clients_one?filename=<?php echo $filename; ?>&height=<?php echo $height; ?>&round=<?php echo $round; ?>&highestrow=<?php echo $highestrow; ?>&import_type_existing=1&out=<?php echo $out; ?>&checkbox=<?php echo $checkbox; ?>');
+      })
+    </script>
+    <?php
+
+  }
+}
+?>
+<img id="coupon" />
+<div class="modal fade" id="import_newclient_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <form action="<?php echo URL::to('user/import_new_clients'); ?>" method="post" autocomplete="off" enctype="multipart/form-data">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Import Clients</h4>
+          </div>
+          <div class="modal-body">
+              <label>Choose File : </label>
+              <input type="file" name="new_file" id="new_file" class="form-control input-sm" accept=".csv" required> <br/>
+              <p style="color:#f00">Note : Identify a csv file that has no blank row at the top of the screen that includes a header row followed by the records to be imported</p>
+          </div>
+          <div class="modal-footer">
+              <input type="submit" class="common_black_button" id="import_new_file" value="Import">
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+<div class="modal fade show_messageus_last_screen_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="z-index:9999999">
+  <div class="modal-dialog modal-lg" role="document" >
+      <div class="modal-content">
+        
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">MessageUs Summary</h4>
+          </div>
+          <div class="modal-body" id="show_messageus_body">
+              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="common_black_button" data-dismiss="modal" aria-label="Close">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="modal fade" id="import_client_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <form id="import_existing_clients_form" action="<?php echo URL::to('user/import_existing_clients'); ?>" method="post" autocomplete="off" enctype="multipart/form-data">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Import Clients</h4>
+            </div>
+            <div class="modal-body">
+                <label>Choose File To Import :</label>
+                <input type="file" name="exists_file" id="exists_file" class="form-control input-sm" accept=".csv" required><br/>
+                <p style="color:#f00">Note : Identify a csv file that has no blank row at the top of the screen that includes a header row followed by the records to be imported</p>
+                <label style="width:100%; margin-top:15px; margin-bottom:15px">Choose Fields To Update For Existing Clients : </label>
+
+                <input type="checkbox" id="select_all_fields" class="select_all_fields" value="1"><label for="select_all_fields" style="width:100%; margin-top:15px; margin-bottom:15px">Select All</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="firstname_update" value="firstname"> <label for="firstname_update" class="field_check"> Firstname </label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="surname_update" value="surname"> <label for="surname_update" class="field_check"> Surname </label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="company_update" value="company"> <label for="company_update" class="field_check">Company</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="address1_update" value="address1"> <label for="address1_update" class="field_check">Address 1</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="address2_update" value="address2"> <label for="address2_update" class="field_check">Address 2</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="address3_update" value="address3"> <label for="address3_update" class="field_check">Address 3</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="address4_update" value="address4"> <label for="address4_update" class="field_check">Address 4</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="address5_update" value="address5"> <label for="address5_update" class="field_check">Address 5</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="email_update" value="email"> <label for="email_update" class="field_check">Primary Email</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="tye_update" value="tye"> <label for="tye_update" class="field_check">Type</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="active_update" value="active"> <label for="active_update" class="field_check">Active</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="client_added_update" value="client_added"> <label for="client_added_update" class="field_check">Client Added</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="tax_reg1_update" value="tax_reg1"> <label for="tax_reg1_update" class="field_check">Tax Reg 1</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="tax_reg2_update" value="tax_reg2"> <label for="tax_reg2_update" class="field_check">Tax Reg 2</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="tax_reg3_update" value="tax_reg3"> <label for="tax_reg3_update" class="field_check">Tax Reg 3</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="email2_update" value="email2"> <label for="email2_update" class="field_check">Secondary Email</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="phone_update" value="phone"> <label for="phone_update" class="field_check">Phone</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="linkcode_update" value="linkcode"> <label for="linkcode_update" class="field_check">LinkCode</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="cro_update" value="cro"> <label for="cro_update" class="field_check">CRO</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="trade_status_update" value="trade_status"> <label for="trade_status_update" class="field_check">Trade Status</label>
+                <input type="checkbox" class="select_import_client" name="import_field[]" id="directory_update" value="directory"> <label for="directory_update" class="field_check">Directory</label>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="common_black_button" id="import_existing_clients" value="Import Clients" required>
+            </div>
+        </form>
+      </div>
+  </div>
+</div>
+<div class="modal fade report_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Report Clients</h4>
+            <br/>
+            <div class="panel-group">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <input type="checkbox" class="select_all_class" id="select_all_class" value="1"><label style="font-weight:600; font-size:14px;">Select All</label>
+                    <a data-toggle="collapse" href="#collapse1" style="margin-left:5%"><label style="font-weight:600; font-size:14px;cursor:pointer">Select By Classname <i class="fa fa-chevron-down" aria-hidden="true"></i></label></a>
+                  </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                  <div class="panel-body">
+                  <h5>Select Clients By Using Class Name</h5>
+                      <?php
+                        if(count($classlist)){
+                          foreach($classlist as $class){
+                        ?>
+                          <div class="col-md-3 col-lg-3 col-sm-3">
+                            <input type="checkbox" class="created_class" id="created_class_<?php echo $class->id; ?>" value="<?php echo $class->id; ?>"><label for="created_class_<?php echo $class->id; ?>"><?php echo $class->classname; ?></label>
+                          </div>
+                        <?php
+                          }
+                        }
+                      ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-body" style="height: 400px; overflow-y: scroll;">
+            <table class="table">
+              <thead>
+              <tr style="background: #fff;">
+                   <th width="5%" style="text-align: left;">S.No</th>
+                   <th width="5%" style="text-align: left;">Select</th>
+                  <th style="text-align: left;">Client ID</th>
+                  <th style="text-align: left;">First Name</th>    
+                  <th style="text-align: left;">Company Name</th>                         
+              </tr>
+              </thead>                            
+              <tbody id="report_tbody">
+              
+
+              </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+            <input type="button" class="common_black_button" id="save_as_csv" value="Save as CSV">
+            <input type="button" class="common_black_button" id="save_as_pdf" value="Save as PDF">
+        </div>
+      </div>
+  </div>
+</div>
+<div class="modal fade bulk_email_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Email Clients</h4>
+            <br/>
+            <div class="panel-group">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <input type="checkbox" class="select_all_email_class" id="select_all_email_class" value="1"><label for="select_all_email_class" style="font-weight:600; font-size:14px;">Select All</label>
+                    <div class="selectall_div" style="display:none">
+                        <input type="checkbox" name="also_deactivated_clients" id="also_deactivated_clients" value="1"><label for="also_deactivated_clients">Also Select the Deactivated Clients</label>
+                    </div>
+                    <input type="checkbox" class="deactive_clients_dont" id="deactive_clients_dont" value="1" checked><label for="deactive_clients_dont" style="font-weight:600; font-size:14px;">Dont send to Deactivate Clients</label>
+                    <input type="checkbox" class="secondary_email_sent" id="secondary_email_sent" value="1"><label for="secondary_email_sent" style="font-weight:600; font-size:14px;">Send To Secondary Email Address</label>
+                    <a data-toggle="collapse" href="#collapse2" style="margin-left:5%"><label style="font-weight:600; font-size:14px;cursor:pointer">Select By Classname <i class="fa fa-chevron-down" aria-hidden="true"></i></label></a>
+                  </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                  <div class="panel-body">
+                  <h5>Select Clients By Using Class Name</h5>
+                      <?php
+                        if(count($classlist)){
+                          foreach($classlist as $class){
+                        ?>
+                          <div class="col-md-3 col-lg-3 col-sm-3">
+                            <input type="checkbox" class="created_email_class" id="created_email_class_<?php echo $class->id; ?>" value="<?php echo $class->id; ?>"><label for="created_email_class_<?php echo $class->id; ?>"><?php echo $class->classname; ?></label>
+                          </div>
+                        <?php
+                          }
+                        }
+                      ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-body" style="height: 380px; overflow-y: scroll;">
+            <table class="table">
+              <thead>
+              <tr style="background: #fff;">
+                   <th width="5%" style="text-align: left;">Select</th>
+                  <th style="text-align: left;">Client ID</th>
+                  <th style="text-align: left;">First Name</th>    
+                  <th style="text-align: left;">Company Name</th>                         
+              </tr>
+              </thead>                            
+              <tbody id="bulk_email_tbody">
+              
+
+              </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+            <label style="float:left">Subject</label>
+            <input type="text" name="email_subject" id="email_subject" class="form-control input-sm" value="">
+            <div style="width:100%">
+              <label style="float:left">Email Content</label>
+            </div>
+            <div style="width:100%;clear:both">
+              <textarea name="email_content" id="email_content"></textarea>
+            </div>
+            <form method="post" name="multiple_upload_form" id="multiple_upload_form" enctype="multipart/form-data" autocomplete="off" action="<?php echo URL::to('user/cm_upload'); ?>">
+               <input type="hidden" name="image_form_submit" value="1"/>
+                <label style="float:left;margin-top:10px">Choose Attachments</label>
+                <input type="file" name="images[]" id="images" multiple style="clear:both">
+            </form>
+                <div class="attachments" id="images_preview" style="float:left;margin-top:10px">
+                </div>
+            <input type="button" class="common_black_button" id="send_bulk_email" value="Send Email">
+        </div>
+      </div>
+  </div>
+</div>
+<div class="modal fade crypt_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Verify Crypt Pin</h4>
+      </div>
+      <div class="modal-body">
+        
+          <label>Enter Crypt Pin : </label>
+          <div class="form-group">            
+              <input class="form-control" name="crypt_pin" id="crypt_pin_input" placeholder="Enter Crypt Pin" type="password" required>
+          </div>
+          <div class="modal-footer">
+            <input type="button" id="crypt_submit" value="Submit" class="common_black_button">
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <form id="form-validation" action="<?php echo URL::to('user/add_cm_clients'); ?>" method="post" class="addsp" enctype="multipart/form-data" autocomplete="off">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Add Clients</h4>
+          </div>
+          <div class="modal-body" style="height: 450px; overflow-y: scroll;border-bottom:2px solid #bdbdbd">
+            <table class="formtable" style="width:100%">
+              <tr id="client_id_div" style="display:none">
+                <td>
+                    <label>Enter Client ID : </label>
+                    <div class="form-group">                
+                        <input class="form-control client_id_add" name="client_id" placeholder="Client Id" type="text" disabled>
+                    </div>
+                </td>
+                <td>
+                  <label>Client Added : </label>
+                    <div class="form-group">                
+                        <input class="form-control client_added" name="client_added" placeholder="Client Added" type="text" readonly>
+                    </div>
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                  <td>
+                      <label>Enter First Name : </label>
+                      <div class="form-group">                
+                          <input class="form-control firstname_add" name="name" placeholder="Enter First Name" type="text" readonly onfocus="this.removeAttribute('readonly');" required>
+                      </div>
+                  </td>
+                  <td>
+                      <label>Enter Surname : </label>
+                      <div class="form-group">                
+                          <input class="form-control surname_add" name="surname" placeholder="Enter Surname" type="text" readonly onfocus="this.removeAttribute('readonly');" required>
+                      </div>
+                  </td>
+                  <td rowspan="3">
+                      <label>Enter Address : </label>
+                      <div class="form-group">                
+                          <input class="form-control address1_add" name="address1" placeholder="Enter Address" type="text" readonly onfocus="this.removeAttribute('readonly');" required>
+                          <input class="form-control address2_add" name="address2" placeholder="Enter Address 2" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                          <input class="form-control address3_add" name="address3" placeholder="Enter Address 3" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                          <input class="form-control address4_add" name="address4" placeholder="Enter Address 4" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                          <input class="form-control address5_add" name="address5" placeholder="Enter Address 5" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      <label>Enter Company Name : </label>
+                      <div class="form-group">                
+                          <input class="form-control company_add" name="cname" placeholder="Enter Company Name" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label>Enter Primary Email : </label>
+                      <div class="form-group">                
+                          <input class="form-control pemail_add" name="email" placeholder="Enter Email Id" type="email" readonly onfocus="this.removeAttribute('readonly');" required>
+                      </div>
+                  </td>
+                  <td>
+                      <label>Secondary Email : </label>
+                      <div class="form-group">                
+                          <input class="form-control semail_add" name="semail" placeholder="Enter Secondary Email" type="email" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                      
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label>CRO : </label>
+                      <div class="form-group">                
+                          <input class="form-control cro_add" name="cro" placeholder="Enter CRO" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                      <label>Type : </label>
+                      <div class="form-group">                
+                          <input class="form-control tye_add" name="tye" placeholder="Enter Type" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                      <label>Link Code : </label>
+                      <div class="form-group">                
+                          <input class="form-control link_add" name="linkcode" placeholder="Enter Link Code" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label>Phone : </label>
+                      <div class="form-group">                
+                          <input class="form-control phone_add" name="phone" placeholder="Enter Phone Number" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                      <label>Select Class : </label>
+                      <div class="form-group">                
+                          <select class="form-control class_add" name="class" required readonly onfocus="this.removeAttribute('readonly');">
+                              <option value="">Select Class</option>
+                              <?php
+                              if(count($classlist)){
+                                foreach($classlist as $class){
+                              ?>
+                                <option value="<?php echo $class->id; ?>"><?php echo $class->classname?></option>
+                              <?php
+                                }
+                              }
+                              ?>
+                            </select>
+
+                      </div>
+                  </td>
+                  <td>
+                        <label>Trade Status : </label>
+                        <div class="form-group">                
+                            <input class="form-control status_add" name="trade_status" placeholder="Enter Trade Status" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                        </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="3">
+                        <label>Directory : </label>
+                        <div class="form-group">                
+                            <input class="form-control directory_add" name="directory" placeholder="Enter Directory" type="text" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+                        </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label>Tax Reg1 : </label>
+                      <div class="form-group">                
+                          <input class="form-control reg1_add" name="tax_reg1" placeholder="Enter Tax Reg1" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                       <label>Tax Reg2 : </label>
+                        <div class="form-group">                
+                            <input class="form-control reg2_add" name="tax_reg2" placeholder="Enter Tax Reg2" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                        </div>
+                  </td>
+                  <td>
+                        <label>Tax Reg3 : </label>
+                        <div class="form-group">                
+                            <input class="form-control reg3_add" name="tax_reg3" placeholder="Enter Tax Reg3" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                        </div>
+                  </td>
+              </tr>
+              
+              <?php
+                $getfields = DB::table('cm_fields')->where('status',0)->get();
+                if(count($getfields))
+                {
+                  $i = 1;
+                  echo '<tr>';
+                  foreach($getfields as $field)
+                  {
+                    if($i % 4 == 0) { echo '</tr><tr>'; }
+                    echo '<td>';
+                    if($field->field == 1)
+                    {
+                      ?>
+                        <label><?php echo $field->name; ?> : </label>
+                        <div class="form-group">
+                            <input type="text" name="<?php echo $field->name; ?>" class="form-control <?php echo $field->name; ?>_add" placeholder="Enter <?php echo $field->name; ?>" readonly onfocus="this.removeAttribute('readonly');">
+                        </div>
+                      <?php
+                    }
+                    elseif($field->field == 2)
+                    {
+                      ?>
+                        <label><?php echo $field->name; ?> : </label>
+                        <div class="form-group">
+                            <input type="radio" name="<?php echo $field->name ?>" class="<?php echo $field->name; ?>_add" id="<?php echo $field->name; ?>_yes" value="yes"><label for="<?php echo $field->name; ?>_yes"> YES </label>
+                            <input type="radio" name="<?php echo $field->name ?>" class="<?php echo $field->name; ?>_add" id="<?php echo $field->name; ?>_no" value="no"><label for="<?php echo $field->name; ?>_no"> NO </label>
+                        </div>
+                      <?php
+                    }
+                    elseif($field->field == 3)
+                    {
+                      ?>
+                        <label><?php echo $field->name; ?> : </label>
+                        <div class="form-group">
+                            <textarea name="<?php echo $field->name; ?>" class="form-control <?php echo $field->name; ?>_add" placeholder="Enter <?php echo $field->name; ?>"></textarea>
+                        </div>
+                      <?php
+                    }
+                    elseif($field->field == 4)
+                    {
+                      ?>
+                        <label><?php echo $field->name; ?> : </label>
+                        <div class="form-group">
+                            <input type="file" name="<?php echo $field->name; ?>" class="form-control <?php echo $field->name; ?>_add" placeholder="Enter <?php echo $field->name; ?>">
+                        </div>
+                      <?php
+                    }
+                    elseif($field->field == 5)
+                    {
+                      ?>
+                        <label><?php echo $field->name; ?> : </label>
+                        <div class="form-group">
+                            <input type="email" name="<?php echo $field->name; ?>" class="form-control <?php echo $field->name; ?>_add" placeholder="Enter <?php echo $field->name; ?>" readonly onfocus="this.removeAttribute('readonly');">
+                        </div>
+                      <?php
+                    }
+                    elseif($field->field == 6)
+                    {
+                      $unserialize = unserialize($field->options);
+                      ?>
+                        <label><?php echo $field->name; ?> : </label>
+                        <div class="form-group">
+                            <select name="<?php echo $field->name; ?>" class="form-control <?php echo $field->name; ?>_add">
+                              <option value="">Select <?php echo $field->name; ?></option>
+                              <?php
+                                if(count($unserialize))
+                                {
+                                  foreach($unserialize as $key => $arrayval)
+                                  {
+                                    ?>
+                                    <option value="<?php echo $arrayval; ?>"><?php echo $key; ?></option>
+                                    <?php
+                                  }
+                                }
+                              ?>
+                            </select>
+                        </div>
+                      <?php
+                    }
+                    echo '</td>';
+                    $i++;
+                  }
+                  echo '</tr>';
+                }
+                ?>
+            </table>
+            
+          </div>
+          <div class="modal-footer">
+            <div class="col-md-3">
+              <label style="float: left;">CRYPT-PIN : </label>
+              <div class="form-group">                
+                  <input class="form-control" name="crypt_pin" placeholder="Enter Pin" type="password" autocomplete="new-password" required readonly onfocus="this.removeAttribute('readonly');">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <input type="submit" id="formvalid_id" style="float: left;margin-top:21px"  value="Submit" class="common_black_button">
+            </div>
+          </div>
+        </div>
+    </form>
+    <!-- <div class="editsp">
+      <div class="modal-content">
+        <form id="form-validation" action="<?php echo URL::to('user/update_cm_clients'); ?>" method="post" enctype="multipart/form-data" autocomplete="off"> 
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Edit Client</h4>
+          </div>
+          
+            <div class="modal-body" style="height: 450px; overflow-y: scroll;border-bottom:2px solid #bdbdbd">
+            <table class="formtable" style="width:100%">
+              <tr>
+                <td>
+                    <label>Enter Client ID : </label>
+                    <div class="form-group">                
+                        <input class="form-control clientid_class" name="clientid" placeholder="Enter Client ID" type="text" disabled>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                  <td>
+                      <label>Enter First Name : </label>
+                      <div class="form-group">                
+                          <input class="form-control first_class" name="name" placeholder="Enter First Name" type="text" required readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                      <label>Enter Surname : </label>
+                      <div class="form-group">                
+                          <input class="form-control sur_classs" name="surname" placeholder="Enter Surname" type="text" required readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td rowspan="3">
+                      <label>Enter Address : </label>
+                      <div class="form-group">                
+                          <input class="form-control address1_class" name="address1" placeholder="Enter Address" type="text" required readonly onfocus="this.removeAttribute('readonly');">
+                          <input class="form-control address2_class" name="address2" placeholder="Enter Address 2" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                          <input class="form-control address3_class" name="address3" placeholder="Enter Address 3" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                          <input class="form-control address4_class" name="address4" placeholder="Enter Address 4" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                          <input class="form-control address5_class" name="address5" placeholder="Enter Address 5" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      <label>Enter Company Name : </label>
+                      <div class="form-group">                
+                          <input class="form-control cname_class" name="cname" placeholder="Enter Company Name" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label>Enter Primary Email : </label>
+                      <div class="form-group">                
+                          <input class="form-control email_class" name="email" placeholder="Enter Email Id" type="email" required readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                      <label>Secondary Email : </label>
+                      <div class="form-group">                
+                          <input class="form-control semail_class" name="semail" placeholder="Enter Secondary Email" type="email" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                      
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label>CRO : </label>
+                      <div class="form-group">                
+                          <input class="form-control cro_class" name="cro" placeholder="Enter CRO" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                      <label>Type : </label>
+                      <div class="form-group">                
+                          <input class="form-control tye_class" name="tye" placeholder="Enter Type" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                      <label>Link Code : </label>
+                      <div class="form-group">                
+                          <input class="form-control linkcode_class" name="linkcode" placeholder="Enter Link Code" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label>Phone : </label>
+                      <div class="form-group">                
+                          <input class="form-control phone_class" name="phone" placeholder="Enter Phone Number" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                      <label>Select Class : </label>
+                      <div class="form-group">                
+                          <select class="form-control class_class" name="class">
+                            <option value="">Select Class</option>
+                            <?php
+                            if(count($classlist)){
+                              foreach($classlist as $class){
+                            ?>
+                              <option value="<?php echo $class->id; ?>"><?php echo $class->classname?></option>
+                            <?php
+                              }
+                            }
+                            ?>
+                          </select>
+
+                      </div>
+                  </td>
+                  <td>
+                        <label>Trade Status : </label>
+                        <div class="form-group">                
+                            <input class="form-control trade_status_class" name="trade_status" placeholder="Enter Trade Status" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                        </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                        <label>Directory : </label>
+                        <div class="form-group">                
+                            <input class="form-control directory_class" name="directory" placeholder="Enter Directory" type="text" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+                        </div>
+                  </td>
+                  <td>
+                        <label>Employer No : </label>
+                        <div class="form-group">                
+                            <input class="form-control employerno_edit" name="employer_no" placeholder="Enter Employer No" type="text" autocomplete="off" disabled>
+                        </div>
+                  </td>
+                  <td>
+                        <label>Salutation : </label>
+                        <div class="form-group">                
+                            <input class="form-control salutation_edit" name="salutation" placeholder="Enter Salutation" type="text" disabled>
+                        </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label>Tax Reg1 : </label>
+                      <div class="form-group">                
+                          <input class="form-control tax_reg1_class" name="tax_reg1" placeholder="Enter Tax Reg1" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                      </div>
+                  </td>
+                  <td>
+                       <label>Tax Reg2 : </label>
+                        <div class="form-group">                
+                            <input class="form-control tax_reg2_class" name="tax_reg2" placeholder="Enter Tax Reg2" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                        </div>
+                  </td>
+                  <td>
+                        <label>Tax Reg3 : </label>
+                        <div class="form-group">                
+                            <input class="form-control tax_reg3_class" name="tax_reg3" placeholder="Enter Tax Reg3" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                        </div>
+                  </td>
+              </tr>
+              <tbody id="edit_clients_div">
+
+              </tbody>
+            </table>
+            </div>
+          
+          <div class="modal-footer">
+            
+            <div class="col-md-3">
+              <label style="float: left;">CRYPT-PIN : </label>
+              <div class="form-group">                
+                  <input class="form-control" name="crypt_pin" id="edit_crypt_pin" placeholder="Enter Pin" type="password" autocomplete="new-password" required readonly onfocus="this.removeAttribute('readonly');">
+                  <input type="hidden" name="id" value="Submit" class="id_class">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <input type="submit" style="float: left;margin-top:21px" id="formvalid_id" value="Submit" class="common_black_button">
+            </div>
+            <div class="col-md-6">
+                <div style="font-size: 14px;margin-top: 13px;">
+                  <b>Action</b><br/>
+                  <a href="javascript:" class="copy_clients fa fa-files-o" data-toggle="tooltip" data-placement="top" title="Copy"></a> &nbsp; 
+                  <a href="javascript:" class="deactivate_clients fa fa-check" data-toggle="tooltip" data-placement="top" title="Deactivate This Client"></a> &nbsp; 
+                  <a href="javascript:" class="print_clients fa fa-print" data-toggle="tooltip" data-placement="top" title="Print"></a> &nbsp; 
+                  <a href="javascript:" class="download_clients fa fa-file-pdf-o" data-toggle="tooltip" data-placement="top" title="PDF"></a>
+                </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div> -->
+  </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade invoice_model" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document" style="width:70%">    
+    <div class="editsp">
+      <div class="modal-content">
+       
+          <div class="modal-header" style="border-bottom: 0px;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#edit_clients_tab" aria-controls="ediclient" role="tab" data-toggle="tab">Edit Client</a></li>
+                  <li role="presentation"><a href="#invoice_tab" aria-controls="invoicetab" role="tab" data-toggle="tab">Invoice</a></li>
+                  <li role="presentation"><a href="#timetask_tab" aria-controls="timetask" role="tab" data-toggle="tab">Time Task</a></li>
+                  <li role="presentation"><a href="#payroll_tab" aria-controls="payroll" role="tab" data-toggle="tab">Payroll Task</a></li>
+                  <li role="presentation"><a href="#notes_tab" aria-controls="notes" role="tab" data-toggle="tab">Notes</a></li>
+                  <li role="presentation"><a href="#bank_tab" aria-controls="bank" role="tab" data-toggle="tab">Bank</a></li>
+                  <li role="presentation"><a href="#message_tab" aria-controls="message" role="tab" data-toggle="tab">Messages Sent</a></li>
+            </ul>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="edit_clients_tab">
+              <form id="form-validation" action="<?php echo URL::to('user/update_cm_clients'); ?>" method="post" enctype="multipart/form-data" autocomplete="off">                 
+                  <div class="modal-body" style="height: 450px; overflow-y: scroll;border-bottom:2px solid #bdbdbd">
+                  <table class="formtable" style="width:100%">
+                    <tr>
+                      <td>
+                          <label>Enter Client ID : </label>
+                          <div class="form-group">                
+                              <input class="form-control clientid_class" name="clientid" placeholder="Enter Client ID" type="text" disabled>
+                          </div>
+                      </td>
+                      <td>
+                        <label>Client Added : </label>
+                        <div class="form-group">                
+                            <input class="form-control client_added_class" name="client_added_class" placeholder="Client Added" type="text" readonly>
+                        </div>
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Enter First Name : </label>
+                            <div class="form-group">                
+                                <input class="form-control first_class" name="name" placeholder="Enter First Name" type="text" required readonly onfocus="this.removeAttribute('readonly');">
+                            </div>
+                        </td>
+                        <td>
+                            <label>Enter Surname : </label>
+                            <div class="form-group">                
+                                <input class="form-control sur_classs" name="surname" placeholder="Enter Surname" type="text" required readonly onfocus="this.removeAttribute('readonly');">
+                            </div>
+                        </td>
+                        <td rowspan="3">
+                            <label>Enter Address : </label>
+                            <div class="form-group">                
+                                <input class="form-control address1_class" name="address1" placeholder="Enter Address" type="text" required readonly onfocus="this.removeAttribute('readonly');">
+                                <input class="form-control address2_class" name="address2" placeholder="Enter Address 2" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                                <input class="form-control address3_class" name="address3" placeholder="Enter Address 3" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                                <input class="form-control address4_class" name="address4" placeholder="Enter Address 4" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                                <input class="form-control address5_class" name="address5" placeholder="Enter Address 5" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label>Enter Company Name : </label>
+                            <div class="form-group">                
+                                <input class="form-control cname_class" name="cname" placeholder="Enter Company Name" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Enter Primary Email : </label>
+                            <div class="form-group">                
+                                <input class="form-control email_class" name="email" placeholder="Enter Email Id" type="email" required readonly onfocus="this.removeAttribute('readonly');">
+                            </div>
+                        </td>
+                        <td>
+                            <label>Secondary Email : </label>
+                            <div class="form-group">                
+                                <input class="form-control semail_class" name="semail" placeholder="Enter Secondary Email" type="email" readonly onfocus="this.removeAttribute('readonly');">
+                            </div>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>CRO : </label>
+                            <div class="form-group">                
+                                <input class="form-control cro_class" name="cro" placeholder="Enter CRO" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                            </div>
+                        </td>
+                        <td>
+                            <label>Type : </label>
+                            <div class="form-group">                
+                                <input class="form-control tye_class" name="tye" placeholder="Enter Type" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                            </div>
+                        </td>
+                        <td>
+                            <label>Link Code : </label>
+                            <div class="form-group">                
+                                <input class="form-control linkcode_class" name="linkcode" placeholder="Enter Link Code" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Phone : </label>
+                            <div class="form-group">                
+                                <input class="form-control phone_class" name="phone" placeholder="Enter Phone Number" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                            </div>
+                        </td>
+                        <td>
+                            <label>Select Class : </label>
+                            <div class="form-group">                
+                                <select class="form-control class_class" name="class">
+                                  <option value="">Select Class</option>
+                                  <?php
+                                  if(count($classlist)){
+                                    foreach($classlist as $class){
+                                  ?>
+                                    <option value="<?php echo $class->id; ?>"><?php echo $class->classname?></option>
+                                  <?php
+                                    }
+                                  }
+                                  ?>
+                                </select>
+
+                            </div>
+                        </td>
+                        <td>
+                              <label>Trade Status : </label>
+                              <div class="form-group">                
+                                  <input class="form-control trade_status_class" name="trade_status" placeholder="Enter Trade Status" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                              </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                              <label>Directory : </label>
+                              <div class="form-group">                
+                                  <input class="form-control directory_class" name="directory" placeholder="Enter Directory" type="text" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+                              </div>
+                        </td>
+                        <td>
+                              <label>Employer No : </label>
+                              <div class="form-group">                
+                                  <input class="form-control employerno_edit_class" name="employer_no" placeholder="Enter Employer No" type="text" autocomplete="off" disabled>
+                              </div>
+                        </td>
+                        <td>
+                              <label>Salutation : </label>
+                              <div class="form-group">                
+                                  <input class="form-control salutation_edit_class" name="salutation" placeholder="Enter Salutation" type="text" disabled>
+                              </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Tax Reg1 : </label>
+                            <div class="form-group">                
+                                <input class="form-control tax_reg1_class" name="tax_reg1" placeholder="Enter Tax Reg1" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                            </div>
+                        </td>
+                        <td>
+                             <label>Tax Reg2 : </label>
+                              <div class="form-group">                
+                                  <input class="form-control tax_reg2_class" name="tax_reg2" placeholder="Enter Tax Reg2" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                              </div>
+                        </td>
+                        <td>
+                              <label>Tax Reg3 : </label>
+                              <div class="form-group">                
+                                  <input class="form-control tax_reg3_class" name="tax_reg3" placeholder="Enter Tax Reg3" type="text" readonly onfocus="this.removeAttribute('readonly');">
+                              </div>
+                        </td>
+                    </tr>                   
+
+                    <tbody id="edit_clients_div">
+
+                    </tbody>
+                  </table>
+                  </div>
+                
+                <div class="modal-footer">
+                  
+                  <div class="col-md-3">
+                    <label style="float: left;">CRYPT-PIN : </label>
+                    <div class="form-group">                
+                        <input class="form-control" name="crypt_pin" id="edit_crypt_pin" placeholder="Enter Pin" type="password" autocomplete="new-password" required readonly onfocus="this.removeAttribute('readonly');">
+                        <input type="hidden" name="id" value="Submit" class="id_class">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="submit" style="float: left;margin-top:21px" id="formvalid_id" value="Submit" class="common_black_button">
+                  </div>
+                  <div class="col-md-6">
+                      <div style="font-size: 14px;margin-top: 13px;">
+                        <b>Action</b><br/>
+                        <a href="javascript:" class="copy_clients fa fa-files-o" data-toggle="tooltip" data-placement="top" title="Copy"></a> &nbsp; 
+                        <a href="javascript:" class="deactivate_clients fa fa-check" data-toggle="tooltip" data-placement="top" title="Deactivate This Client"></a> &nbsp; 
+                        <a href="javascript:" class="print_clients fa fa-print" data-toggle="tooltip" data-placement="top" title="Print"></a> &nbsp; 
+                        <a href="javascript:" class="download_clients fa fa-file-pdf-o" data-toggle="tooltip" data-placement="top" title="PDF"></a>
+                      </div>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="invoice_tab">
+              <div class="modal-body" style="height: 450px; overflow-y: scroll;border-bottom:2px solid #bdbdbd; padding-top: 0px;">
+                <h4 style="margin-bottom: 15px;">List of Invoices sent to this client</h4>
+                <div id="invoice_tbody" >
+                  
+                </div>
+                <input type="hidden" class="invoice_client_id" name="">                                   
+              </div>
+              <div class="modal-footer">
+                  <input type="button" class="common_black_button" id="print_selected_invoice" value="Download & Zip Selected Invoices">
+                  <input type="button" class="common_black_button" id="save_as_csv_invoice" value="Save as CSV">
+                  <input type="button" class="common_black_button" id="save_as_pdf_invoice" value="Save as PDF">
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="timetask_tab">
+
+
+                <div class="modal-body" style="height: 450px; overflow-y: scroll;border-bottom:2px solid #bdbdbd; padding-top: 0px;">
+                  <h4 style="margin-bottom: 15px;">List of tasks assigned to this client</h4>
+                <div id="timetask_tbody" >
+                  
+                </div>
+                
+              </div>
+              <div class="modal-footer">
+                  
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="payroll_tab">
+              <div class="modal-body" style="height: 450px; overflow-y: scroll;border-bottom:2px solid #bdbdbd; padding-top: 0px;">
+                  <h4 style="margin-bottom: 15px;">List of Payroll tasks</h4>
+                <div id="payroll_tbody">
+                  
+                </div>                                
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="notes_tab">
+              <div class="modal-body" style="height: 450px; overflow-y: scroll;border-bottom:2px solid #bdbdbd; padding-top: 0px;">
+                  <h4 style="margin-bottom: 15px;">Notes</h4>
+                <div class="modal-body">
+<style type="text/css">
+.select_button{margin-top: 15px;}
+.select_button ul li .input_select{background: #000; text-align: center; padding: 8px 12px; color: #fff; float: left; border:0px; font-size: 15px;}
+.select_button ul li .input_select:hover{background: #5f5f5f; text-decoration: none;}
+</style>
+                  <form action="<?php echo URL::to('user/cm_note_update')?>" method="post">
+
+                     <textarea name="notes" id="editor_2" class="notes_class">
+                    </textarea>
+                    <input type="hidden" value="" class="clientid_note" name="client_id">
+                    <div class="select_button">
+                      <ul>
+                        <li><input type="submit" class="input_select" name=""></li>
+                        <li><a href="javascript:" style="font-size: 15px;" id="print_notes">Print</a></li>
+                      </ul>
+                    </div> 
+                  </form>                 
+                </div>                                
+              </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="bank_tab">
+              <div class="modal-body">
+                <div id="bank_detail_body">
+                  
+                </div> 
+              </div>
+              <div class="modal-footer">
+                <div class="select_button">
+                  <ul>                    
+                    <li><input type="hidden" class="bank_client_class" name="">
+                      <a href="javascript:" class="add_bank" style="font-size: 15px;">Add Bank</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="message_tab">
+              <div class="modal-body" style="height: 450px; overflow-y: scroll;border-bottom:2px solid #bdbdbd; padding-top: 0px;">
+                  <h4 style="margin-bottom: 15px;">Messages Sent</h4>
+                <div id="message_tbody">
+                  
+                </div>                                
+              </div>
+            </div>
+        </div>
+      </div>         
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bank_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Add Bank</h4>
+                        
+        </div>
+        <div class="modal-body" >
+          <div class="form-group">
+            BanK Name
+              <input type="text" name="" class="form-control"  id="bank_name" placeholder="Bank Name" >
+            </div>
+            <div class="form-group">Bank Account Name
+              <input type="text" name="" class="form-control" id="account_name" placeholder="Bank Account Name">
+            </div>
+            <div class="form-group">Bank Account Number
+              <input type="number" name="" class="form-control" id="account_number" placeholder="Bank Account Number">
+            </div>
+            
+            <input type="hidden" id="bank_current_client_id" name="" />
+        </div>
+        <div class="modal-footer">            
+            <input type="button" class="common_black_button bank_submit"  value="Add Bank">
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="content_section" style="margin-bottom:200px">
+  <div class="page_title">
+        <h4 class="col-lg-3" style="padding: 0px;">
+                Client Management System                
+            </h4>
+            <div class="col-lg-1 text-right" style="padding-right: 0px; line-height: 35px;">
+                
+            </div>
+            <div class="col-lg-1 text-right" style="padding-right: 0px;">
+              <input type="text" name="" placeholder="Search" class="form-control search_input_class" >
+            </div>
+            <div class="col-lg-2 text-right" style="padding-right: 0px;">
+              <select class="form-control search_select_class">
+                <option value="">Select Type</option>
+                <option value="client_id">Client Id</option>
+                <option value="firstname">First Name</option>
+                <option value="surname">Surname</option>
+                <option value="address1">Address</option>
+                <option value="company">Company Name</option>
+                <option value="email">Email Address</option>
+                <option value="phone">Phone</option>
+              </select>
+            </div>
+            <div class="col-lg-5 text-right"  style="padding: 0px;" >
+              <div class="select_button" style=" margin-left: 10px;">
+                <ul>
+                <li><a href="javascript:" id="search_button" style="font-size: 13px; font-weight: 500;">Search</a></li>
+                <li><a href="" style="font-size: 13px; font-weight: 500;">Reset</a></li>
+                <li><a href="javascript:" class="bulkemail_button" style="font-size: 13px; font-weight: 500;" data-toggle="modal" data-target=".crypt_modal">Bulk Email</a></li>
+                <li><a href="javascript:" class="report_button" style="font-size: 13px; font-weight: 500;">Report</a></li>
+                <li><a href="javascript:" class="addclientbutton" style="font-size: 13px; font-weight: 500;" data-toggle="modal" data-target=".bs-example-modal-sm">Add Client</a></li>
+                <li><a href="javascript:" class="importclientbutton" style="font-size: 13px; font-weight: 500;">Import Client</a></li>
+                <div class="import_div" style="display:none">
+                    <label>DO YOU WANT TO IMPORT NEW RECORDS ONLY</label><br/>
+                    <input type="radio" name="import_client" id="import_yes" value="1"><label for="import_yes">Yes</label>
+                    <input type="radio" name="import_client" id="import_no" value="1"><label for="import_no">No</label>
+                </div>
+              </ul>
+            </div>
+            <br/>
+            <?php $check_incomplete = Db::table('user_login')->where('userid',1)->first(); if($check_incomplete->cm_incomplete == 1) { $inc_checked = 'checked'; } else { $inc_checked = ''; } ?>
+                <input type="checkbox" name="show_incomplete" id="show_incomplete" value="1" <?php echo $inc_checked;?> style="margin-right:10px"><label for="show_incomplete">Hide Deactivated Accounts</label>
+  </div>
+  <div class="table-responsive" style="max-width: 100%; float: left;margin-bottom:30px; margin-top:55px">
+  </div>
+  <div style="clear: both;">
+   <?php
+    if(Session::has('message')) { ?>
+        <p class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><?php echo Session::get('message'); ?></p>
+
+    <?php }
+    if(isset($_GET['pin_invalid'])) { ?>
+        <p class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>Crypt Pin You have entered is incorrect. </p>
+        <script>
+            window.history.replaceState(null, null, "<?php echo URL::to('user/client_management'); ?>");
+        </script>
+    <?php } 
+    
+    if(isset($_GET['email_sent'])) { DB::table('cm_email_attachment')->delete(); ?>
+        <p class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>Email Sent successfully. </p>
+        <script>
+            window.history.replaceState(null, null, "<?php echo URL::to('user/client_management'); ?>");
+        </script>
+    <?php } ?>
+    </div> 
+
+<table class="display nowrap fullviewtablelist" id="client_expand" width="100%">
+                        <thead>
+                        <tr style="background: #fff;">
+                             <th width="2%" style="text-align: left;">S.No</th>
+                            <th style="text-align: left;">Client ID</th>
+                            <th style="text-align: left;">First Name</th>
+                            <th style="text-align: left;">Surname</th>
+                            <th style="text-align: left;">Company Name</th>
+                            <th style="text-align: left; width:300px; max-width: 300px;">Address</th>
+                            <th style="text-align: left;">Primary Email</th> 
+                            <th style="text-align: left;">Telephone</th> 
+                            
+                            <th style="text-align: left;">Statement</th>
+                        </tr>
+                        </thead>                            
+                        <tbody id="clients_tbody">
+                        <?php
+                            $i=1;
+                            if(count($clientlist)){              
+                              foreach($clientlist as $key => $client){
+                                $address = $client->address1.' '.$client->address2.' '.$client->address3.' '.$client->address4.' '.$client->address5;
+                                  $disabled='';
+                                  if($client->active != "")
+                                  {
+                                    if($client->active == 2)
+                                    {
+                                      $disabled='disabled';
+                                    }
+                                    $check_color = DB::table('cm_class')->where('id',$client->active)->first();
+                                    $style="color:#".$check_color->classcolor."";
+                                  }
+                                  else{
+                                    $style="color:#000";
+                                  }
+                                  
+                          ?>
+                            <tr class="edit_task <?php echo $disabled; ?>" id="clientidtr_<?php echo $client->id; ?>">
+                                <td style="<?php echo $style; ?>"><?php echo $i; ?></td>
+                                <td align="left"><a href="javascript:" id="<?php echo base64_encode($client->id); ?>" class="invoice_class" style="<?php echo $style; ?>"><?php echo $client->client_id; ?></a></td>
+                                <td align="left"><a href="javascript:" id="<?php echo base64_encode($client->id); ?>" class="invoice_class" style="<?php echo $style; ?>"><?php echo $client->firstname; ?></a></td>
+                                <td align="left"><a href="javascript:" id="<?php echo base64_encode($client->id); ?>" class="invoice_class" style="<?php echo $style; ?>"><?php echo $client->surname; ?></a></td>
+                                <td align="left"><a href="javascript:" id="<?php echo base64_encode($client->id); ?>" class="invoice_class" style="<?php echo $style; ?>"><?php echo ($client->company == "")?$client->firstname.' & '.$client->surname:$client->company; ?></a></td>
+                                <td style="word-wrap: break-word; white-space:normal; min-width:300px; max-width: 300px;" align="left"><a href="javascript:" id="<?php echo base64_encode($client->id); ?>" class="invoice_class" style="<?php echo $style; ?>"><?php echo $address; ?></a></td>
+                                <td align="left"><a style="<?php echo $style; ?>" href="mailto:<?php echo $client->email; ?>"><?php echo $client->email; ?></a></td>
+                                <td align="left"><a href="javascript:" id="'.base64_encode($client->id).'" class="invoice_class" style="'.$style.'"><?php echo $client->phone; ?></a></td>
+<!-- 
+                                <td align="center"><a href="javascript:" id="<?php echo base64_encode($client->client_id); ?>" class="payroll_class" style="<?php echo $style; ?>">Payroll Tasks</a></td> -->
+
+                                <td style="<?php echo $style; ?>" align="left">
+                                  <input type="checkbox" class="client_statement" id="statement_<?php echo $client->client_id; ?>" data-element="<?php echo $client->id; ?>" <?php echo($client->statement == "yes")?'checked':''; ?>><label for="statement_<?php echo $client->client_id; ?>">Yes</label>
+                                </td>
+                            </tr>
+                            <?php
+                              $i++;
+                              }              
+                            }
+                            if($i == 1)
+                            {
+                              echo'<tr><td colspan="9" align="center">Empty</td></tr>';
+                            }
+                          ?> 
+                        </tbody>
+                    </table>
+</div>
+    <!-- End  -->
+<div class="main-backdrop"><!-- --></div>
+<div id="print_image">
+    
+</div>
+<div id="report_pdf_type_two" style="display:none">
+  <style>
+  .table_style {
+      width: 100%;
+      border-collapse:collapse;
+      border:1px solid #c5c5c5;
+  }
+  </style>
+  <table class="table_style">
+    <thead>
+      <tr>
+      <td style="text-align: left;border:1px solid #000;">Client ID</td>
+      <td style="text-align: left;border:1px solid #000;">FIrstName</td>
+      <td style="text-align: left;border:1px solid #000;">Surname</td>
+      <td style="text-align: left;border:1px solid #000;">Company</td>
+      <td style="text-align: left;border:1px solid #000;">Address</td>
+      <td style="text-align: left;border:1px solid #000;">EMail ID</td>
+      </tr>
+    </thead>
+    <tbody id="report_pdf_type_two_tbody">
+
+    </tbody>
+  </table>
+</div>
+
+
+
+<div id="report_pdf_type_two_invoice" style="display:none">
+  <style>
+  .table_style {
+      width: 100%;
+      border-collapse:collapse;
+      border:1px solid #c5c5c5;
+  }
+  </style>
+
+  <h3 id="pdf_title_inivoice" style="width: 100%; text-align: center; margin: 15px 0px; float: left;">List of Invoices issued to <span class="invoice_filename"></span></h3>  
+
+  <table class="table_style">
+    <thead>
+      <tr>
+      <th width="2%" style="text-align: left; border-bottom:1px solid #ccc; border-right:1px solid #ccc; padding-left:5px">S.No</th>
+      <th style="text-align: left; border-bottom:1px solid #ccc; border-right:1px solid #ccc; padding-left:5px">Invoice ID</th>
+      <th style="text-align: left; border-bottom:1px solid #ccc; border-right:1px solid #ccc; padding-left:5px border-bottom:1px solid #ccc; border-right:1px solid #ccc; padding-left:5px">Date</th>
+      <th style="text-align: left; border-bottom:1px solid #ccc; border-right:1px solid #ccc; padding-left:5px">Client ID</th>
+      <th style="text-align: left; border-bottom:1px solid #ccc; border-right:1px solid #ccc; padding-left:5px ">Company Name</th>
+      <th style="text-align: right; border-bottom:1px solid #ccc; border-right:1px solid #ccc; padding-left:5px ">Net</th>
+      <th style="text-align: right; border-bottom:1px solid #ccc; border-right:1px solid #ccc; padding-left:5px">VAT</th>
+      <th style="text-align: right; border-bottom:1px solid #ccc; border-right:1px solid #ccc; padding-left:5px">Gross</th>
+      </tr>
+    </thead>
+    <tbody id="report_pdf_type_two_tbody_invoice">
+
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+<div class="modal_load"></div>
+<input type="hidden" name="hidden_client_count" id="hidden_client_count" value="">
+<input type="hidden" name="show_alert" id="show_alert" value="">
+<input type="hidden" name="pagination" id="pagination" value="1">
+
+<script type="text/javascript">
+<?php
+
+if(!empty($_GET['divid']))
+{
+  $divid = $_GET['divid'];
+  ?>
+  $(function() {
+    $("body").addClass("loading");
+    setTimeout(function(){ 
+      if($("#<?php echo $divid; ?>").length > 0)
+      {
+        $(document).scrollTop( $("#<?php echo $divid; ?>").offset().top - parseInt(150) ); 
+        <?php if(Session::get('edit_message')){ ?>
+          $.colorbox({html:"<p style=text-align:center;font-size:18px;font-weight:600;color:green><?php echo Session::get('edit_message'); ?></p>",width:"30%",fixed:true});
+        <?php } else if(Session::get('edit_error')) { ?>
+          $.colorbox({html:"<p style=text-align:center;font-size:18px;font-weight:600;color:#f00><?php echo Session::get('edit_error'); ?></p>",width:"30%",fixed:true});
+        <?php } else if(isset($_GET['activate'])) { ?>
+            $.colorbox({html:"<p style=text-align:center;font-size:18px;font-weight:600;color:green>Client Activated Successfully.</p>",width:"30%",fixed:true});
+        <?php } else if(isset($_GET['deactivate'])) { ?>
+            $.colorbox({html:"<p style=text-align:center;font-size:18px;font-weight:600;color:#f00>Client Deactivated Successfully.</p>",width:"30%",fixed:true});
+        <?php } else if(isset($_GET['status_pin_invalid'])) { ?>
+            $.colorbox({html:"<p style=text-align:center;font-size:18px;font-weight:600;color:#f00>Crypt Pin You have entered is Incorrect.</p>",width:"30%",fixed:true});
+        <?php } ?>
+      }
+      $("body").removeClass("loading"); 
+       window.history.replaceState(null, null, "<?php echo URL::to('user/client_management'); ?>");
+    }, 5000); 
+  });
+  <?php
+} ?>
+// $(window).scroll(function(e){
+//   var len = $(".load_more").length;
+//   if(len > 0)
+//   {
+//     var off = $(".load_more").offset();
+//     var scroll = $(window).scrollTop();
+//     var h = screen.height - parseInt(220);
+//     var screen_height = $(document).height();
+
+//     var final_scroll = parseInt(scroll) + parseInt(h);
+//     if(off.top <= final_scroll)
+//     {
+//       $("body").addClass("loading");
+//       doSomething();
+//     }
+//   }
+// });
+// function doSomething() { 
+//     var paginate = $("#pagination").val();
+//     var count = parseInt(paginate) + parseInt(1);
+//     var base_url = "<?php echo URL::to('user/clientmanagement_paginate'); ?>";
+
+//     $("#pagination").val(count);
+//     $.ajax({
+//       url: base_url,
+//       data: {page:count},
+//       type: "get",
+//       success:function(result){
+//         $("body").removeClass("loading");
+//         $("body").find(".load_more").removeClass("load_more");
+//         $("#clients_tbody").append(result);
+//         var table = $('#client_expand').DataTable();
+ 
+//         table.fixedHeader.adjust();
+//       }
+//     });
+//   }
+$( function() {
+  $(".client_added" ).datepicker({ dateFormat: 'dd/MM/yy',monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], });
+  $(".client_added_class" ).datepicker({ dateFormat: 'dd/MM/yy',monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], })
+});
+$(document).ready(function(){
+    $('#images').on('change',function(){
+      $("body").addClass("loading");
+      setTimeout(function(){ 
+          $('#multiple_upload_form').ajaxForm({
+              //display the uploaded images
+              target:'#images_preview',
+              beforeSubmit:function(e){
+                  $(".attachments").html(e);
+                   $("body").removeClass("loading");
+              },
+              success:function(e){
+                  $(".attachments").html(e);
+                   $("body").removeClass("loading");
+              },
+              error:function(e){
+                  $(".attachments").html(e);
+                   $("body").removeClass("loading");
+              }
+          }).submit();
+      }, 2000);
+      
+  });
+});
+$(document).ready(function() {
+  $('[data-toggle="tooltip"]').tooltip(); 
+  if($("#show_incomplete").is(':checked'))
+  {
+    $(".edit_task").each(function() {
+        if($(this).hasClass('disabled'))
+        {
+          $(this).hide();
+        }
+    });
+  }
+  else{
+    $(".edit_task").each(function() {
+        if($(this).hasClass('disabled'))
+        {
+          $(this).show();
+        }
+    });
+  }
+});
+
+$(window).click(function(e) {
+  if($(e.target).hasClass('view_message'))
+  {
+    var message_id = $(e.target).attr("data-element");
+    $.ajax({
+      url:"<?php echo URL::to('user/show_messageus_sample_screen'); ?>",
+      type:"post",
+      data:{message_id:message_id},
+      success:function(result)
+      {
+        $(".show_messageus_last_screen_modal").modal("show");
+        $("#show_messageus_body").html(result);
+      }
+    })
+  }
+  if(e.target.id == "print_selected_invoice")
+  {
+    var countval = $(".invoice_check:checked").length;
+    if(countval == 0)
+    {
+      alert("Please select atleast one checkbox to download the invoice.");
+    }
+    else{
+      $("body").addClass("loading");
+      setTimeout(function() {
+        var ids = '';
+        $(".invoice_check:checked").each(function() {
+          var invoiceid = $(this).attr("data-element");
+          if(ids == "")
+          {
+            ids = invoiceid;
+          }
+          else{
+            ids = ids+','+invoiceid;
+          }
+        });
+        $.ajax({
+          url:"<?php echo URL::to('user/print_selected_invoice'); ?>",
+          type:"get",
+          data:{ids:ids},
+          dataType:"json",
+          success:function(result)
+          {
+            SaveToDisk("<?php echo URL::to('public'); ?>/"+result['time'],result['company']);
+            $("body").removeClass("loading");
+          }
+        });
+      },1000);
+    }
+  }
+  if(e.target.id == "print_notes")
+  {
+    var texteditor = CKEDITOR.instances['editor_2'].getData();
+    var w = window.open("about:blank");
+    w.document.write(texteditor);
+    w.document.close();
+    w.focus();
+    w.print();
+    w.close();
+  }
+  if(e.target.id == "select_all_fields")
+  {
+    if($(e.target).is(':checked'))
+    {
+      $(".select_import_client").each(function() {
+        $(this).prop("checked",true);
+      });
+    }
+    else{
+      $(".select_import_client").each(function() {
+        $(this).prop("checked",false);
+      });
+    }
+  }
+  if($(e.target).hasClass('client_statement'))
+  {
+    if($(e.target).is(":checked"))
+    {
+      $('body').addClass('loading');
+      var client_id = $(e.target).attr('data-element');
+      var value = $(e.target).val();
+      $.ajax({
+        url:"<?php echo URL::to('user/cm_statement_update'); ?>",
+        type:"post",
+        data:{id:client_id,value:"yes"},
+        success: function(result)
+        {
+          $('body').removeClass('loading');
+        }
+      });
+    }
+    else{
+      $('body').addClass('loading');
+      var client_id = $(e.target).attr('data-element');
+      var value = $(e.target).val();
+      $.ajax({
+        url:"<?php echo URL::to('user/cm_statement_update'); ?>",
+        type:"post",
+        data:{id:client_id,value:"no"},
+        success: function(result)
+        {
+          $('body').removeClass('loading');
+        }
+      });
+    }
+  }
+  if(e.target.id == "select_all_email_class")
+  {
+    if($(e.target).is(":checked"))
+    {
+      $(".select_email_client").each(function() {
+        $(this).prop("checked",true);
+      });
+      $(".created_email_class").each(function() {
+        $(this).prop("checked",true);
+      });
+      $(".selectall_div").show();
+    }
+    else{
+      $(".select_email_client").each(function() {
+        $(this).prop("checked",false);
+      });
+      $(".created_email_class").each(function() {
+        $(this).prop("checked",false);
+      });
+      $(".selectall_div").hide();
+    }
+  }
+  else if(e.target.id == "also_deactivated_clients")
+  {
+    if($(e.target).is(":checked"))
+    {
+      $("#deactive_clients_dont").prop("checked",false);
+      $(".deactive_tr").each(function() {
+        $(this).show();
+      });
+      $(".selectall_div").hide();
+    }
+    else{
+      $("#deactive_clients_dont").prop("checked",true); 
+      $(".deactive_tr").each(function() {
+        $(this).hide();
+      });
+      $(".selectall_div").hide();
+    }
+  }
+  else{
+    $(".selectall_div").hide();
+  }
+
+  if(e.target.id == "import_existing_clients")
+  {
+    var checkcount = $(".select_import_client:checked").length;
+    if(checkcount == 0)
+    {
+      alert("Please Select atleast one field to update.");
+      return false;
+    }
+    else{
+      //$("#import_existing_clients_form").submit();
+    }
+  }
+  if(e.target.id == "import_no")
+  {
+    $(".import_div").hide();
+    $("#import_client_modal").modal("show");
+  }
+  if(e.target.id == "import_yes")
+  {
+    $(".import_div").hide();
+    $("#import_newclient_modal").modal("show");
+  }
+  if($(e.target).hasClass('report_button'))
+  {
+    $("body").addClass("loading");
+    setTimeout(function(){
+      $.ajax({
+        url:"<?php echo URL::to('user/get_cm_report_clients'); ?>",
+        type:"get",
+        success: function(result){
+          $("#report_tbody").html(result);
+          $(".report_modal").modal("show");
+          $("body").removeClass("loading");
+        }
+      })
+    }, 2000);
+  }
+  if($(e.target).hasClass('importclientbutton'))
+  {
+    $(".import_div").toggle();
+  }
+
+  if($(e.target).hasClass('fileattachment'))
+  {
+    e.preventDefault();
+    var element = $(e.target).attr('data-element');
+    $('body').addClass('loading');
+    setTimeout(function(){
+      SaveToDisk(element,element.split('/').reverse()[0]);
+      $('body').removeClass('loading');
+      }, 3000);
+    return false; //this is critical to stop the click event which will trigger a normal file download
+  }
+  
+  if(e.target.id == "deactive_clients_dont")
+  {
+    if($(e.target).is(":checked"))
+    {
+      $("#also_deactivated_clients").prop("checked",false); 
+      $(".deactive_tr").each(function() {
+        $(this).hide();
+      });
+    }
+    else{
+      $("#also_deactivated_clients").prop("checked",true); 
+      $(".deactive_tr").each(function() {
+        $(this).show();
+      });
+    }
+  }
+  if(e.target.id == "crypt_submit")
+  {
+    if (CKEDITOR.instances.editor_1) CKEDITOR.instances.email_content.destroy();
+    var input = $("#crypt_pin_input").val();
+    if(input == "")
+    {
+      alert("Please Enter the Crypt Pin");
+    }
+    else{
+      e.preventDefault();
+      $("body").addClass("loading");
+      $.ajax({
+        url:"<?php echo URL::to('user/email_check_crypt_pin'); ?>",
+        type:"post",
+        data:{pin:input},
+        success: function(result){
+          if(result == 1)
+          {
+
+            $("body").addClass("loading");
+            setTimeout(function(){ 
+              $.ajax({
+                url:"<?php echo URL::to('user/get_cm_bulk_clients'); ?>",
+                type:"get",
+                success: function(result){
+                  $("#bulk_email_tbody").html(result);
+                  $(".crypt_modal").modal("hide");
+                  $(".bulk_email_modal").modal("show");
+                  $("body").removeClass("loading");
+                  setTimeout(function(){  
+
+                     CKEDITOR.replace('email_content',
+
+                     {
+
+                      height: '150px',
+
+                     }); 
+
+                  },500);
+                }
+              });
+            }, 2000);
+          }
+          else{
+            window.location.replace("<?php echo URL::to('user/client_management?pin_invalid=1'); ?>")
+          }
+        }
+      })
+    }
+  }
+  if(e.target.id == "send_bulk_email")
+  {
+    
+    var subject = $("#email_subject").val();
+    var content = CKEDITOR.instances['email_content'].getData();
+    var attachments = $(".email_attachments").length;
+    var clients = $(".select_email_client:checked").length;
+    var timeval = "<?php echo time(); ?>";
+    if(subject != "" && content != "" && clients > 0)
+    {
+      $("body").addClass("loading");
+      if($("#secondary_email_sent").is(":checked"))
+      {
+        var secondary = 1;
+      }
+      else{
+        var secondary = 0;
+      }
+      var option_length = $(".select_email_client:checked").length;
+      $(".select_email_client:checked").each(function(i, value) {
+          var id = $(this).attr("data-element");
+          var keyi = parseInt(i) + parseInt(1);
+          if($(this).parents("tr").is(":visible"))
+          {
+            setTimeout(function(){
+                $.ajax({
+                  url:"<?php echo URL::to('user/cm_bulk_email'); ?>",
+                  type:"post",
+                  data:{client_id:id,secondary:secondary,content:content,subject:subject,timeval:timeval},
+                  success: function(result) {
+                    
+                    if(option_length == keyi)
+                    {
+                      $("body").removeClass("loading");
+                      //window.location.replace("<?php echo URL::to('user/client_management?email_sent=1'); ?>");
+                    }
+                  }
+                });
+            },2000 + ( i * 2000 ));
+          }
+      });
+    }
+    else{
+      alert("Please Select the Clients and Fill the Email Content.");
+    }
+  }
+  if(e.target.id == "save_as_pdf")
+  {
+    $("#report_pdf_type_two_tbody").html('');
+    if($(".select_client:checked").length)
+    {
+      $("body").addClass("loading");
+        var checkedvalue = '';
+        var size = 100;
+        $(".select_client:checked").each(function() {
+          var value = $(this).val();
+          if(checkedvalue == "")
+          {
+            checkedvalue = value;
+          }
+          else{
+            checkedvalue = checkedvalue+","+value;
+          }
+        });
+        var exp = checkedvalue.split(',');
+        var arrayval = [];
+        for (var i=0; i<exp.length; i+=size) {
+            var smallarray = exp.slice(i,i+size);
+            arrayval.push(smallarray);
+        }
+        $.each(arrayval, function( index, value ) {
+            setTimeout(function(){ 
+              var imp = value.join(',');
+              $.ajax({
+                url:"<?php echo URL::to('user/cm_report_pdf_type_2'); ?>",
+                type:"post",
+                data:{value:imp,type:2},
+                success: function(result)
+                {
+                  $("#report_pdf_type_two_tbody").append(result);
+                  
+                  var last = index + parseInt(1);
+                  if(arrayval.length == last)
+                  {
+                    var pdf_html = $("#report_pdf_type_two").html();
+                    $.ajax({
+                      url:"<?php echo URL::to('user/download_report_pdfs'); ?>",
+                      type:"post",
+                      data:{htmlval:pdf_html},
+                      success: function(result)
+                      {
+                        SaveToDisk("<?php echo URL::to('papers'); ?>/"+result,result);
+                      }
+                    });
+                  }
+                }
+              });
+            }, 3000);
+        });
+        
+    }
+    else{
+      $("body").removeClass("loading");
+      alert("Please Choose atleast one client to continue.");
+    }
+  }
+
+  if(e.target.id == "save_as_csv")
+  {
+    $("body").addClass("loading");
+    if($(".select_client:checked").length)
+    {
+      var checkedvalue = '';
+      $(".select_client:checked").each(function() {
+          var value = $(this).val();
+          if(checkedvalue == "")
+          {
+            checkedvalue = value;
+          }
+          else{
+            checkedvalue = checkedvalue+","+value;
+          }
+      });
+      $.ajax({
+        url:"<?php echo URL::to('user/cm_report_csv'); ?>",
+        type:"post",
+        data:{value:checkedvalue},
+        success: function(result)
+        {
+          SaveToDisk("<?php echo URL::to('papers'); ?>/CM_Report.csv",'CM_Report.csv');
+        }
+      });
+    }
+    else{
+      $("body").removeClass("loading");
+      alert("Please Choose atleast one client to continue.");
+    }
+  }
+  if(e.target.id == "select_all_class")
+  {
+    if($(e.target).is(":checked"))
+    {
+      $(".select_client").each(function() {
+        $(this).prop("checked",true);
+      });
+      $(".created_class").each(function() {
+        $(this).prop("checked",true);
+      });
+
+      var count = $(".select_client:checked").length;
+      $("#hidden_client_count").val(count);
+      if(count > 100)
+      {
+        var alertshown = $("#show_alert").val();
+        if(alertshown == "")
+        {
+            alert("Please note that only 100 records can be exported into the PDF at a time hence the next set of records will be downloaded in another PDF and so on.");
+            $("#show_alert").val("1");
+        }
+      }
+    }
+    else{
+      $(".select_client").each(function() {
+        $(this).prop("checked",false);
+      });
+      $(".created_class").each(function() {
+        $(this).prop("checked",false);
+      });
+      $("#hidden_client_count").val('');
+    }
+  }
+  if(e.target.id == "select_all_import_class")
+  {
+    if($(e.target).is(":checked"))
+    {
+      $(".select_import_client").each(function() {
+        $(this).prop("checked",true);
+      });
+      $(".created_import_class").each(function() {
+        $(this).prop("checked",true);
+      });
+    }
+    else{
+      $(".select_import_client").each(function() {
+        $(this).prop("checked",false);
+      });
+      $(".created_import_class").each(function() {
+        $(this).prop("checked",false);
+      });
+    }
+  }
+  
+  if($(e.target).hasClass('select_client'))
+  {
+    if($(e.target).is(":checked"))
+    {
+      var classid = $(e.target).attr("data-element");
+      var classfull = $(".class_"+classid).length;
+      var classchecked = $(".class_"+classid+":checked").length;
+      var fulldata = $(".select_client").length;
+      var fulldatachecked = $(".select_client:checked").length;
+      if(classfull == classchecked)
+      {
+        $("#created_class_"+classid).prop("checked",true);
+      }
+      if(fulldata == fulldatachecked)
+      {
+        $("#select_all_class").prop("checked",true);
+      }
+
+      var count = $(".select_client:checked").length;
+      $("#hidden_client_count").val(count);
+      if(count > 100)
+      {
+        var alertshown = $("#show_alert").val();
+        if(alertshown == "")
+        {
+            alert("Please note that only 100 records can be exported into the PDF at a time hence the next set of records will be downloaded in another PDF and so on.");
+            $("#show_alert").val("1");
+        }
+      }
+    }
+    else{
+      $("#select_all_class").prop("checked",false);
+      var classid = $(e.target).attr("data-element");
+      $("#created_class_"+classid).prop("checked",false);
+    }
+  }
+  if($(e.target).hasClass('select_email_client'))
+  {
+    if($(e.target).is(":checked"))
+    {
+      var classid = $(e.target).attr("data-element");
+      var classfull = $(".email_class_"+classid).length;
+      var classchecked = $(".email_class_"+classid+":checked").length;
+      var fulldata = $(".select_email_client").length;
+      var fulldatachecked = $(".select_email_client:checked").length;
+      if(classfull == classchecked)
+      {
+        $("#created_email_class_"+classid).prop("checked",true);
+      }
+      if(fulldata == fulldatachecked)
+      {
+        $("#select_all_email_class").prop("checked",true);
+      }
+    }
+    else{
+      $("#select_all_email_class").prop("checked",false);
+      var classid = $(e.target).attr("data-element");
+      $("#created_email_class_"+classid).prop("checked",false);
+    }
+  }
+  
+  if($(e.target).hasClass('created_class'))
+  {
+    if($(e.target).is(":checked"))
+    {
+      var classid = $(e.target).val();
+      $(".class_"+classid).each(function() {
+        $(this).prop("checked",true);
+      });
+      var fulldata = $(".select_client").length;
+      var fulldatachecked = $(".select_client:checked").length;
+      if(fulldata == fulldatachecked)
+      {
+        $("#select_all_class").prop("checked",true);
+      }
+
+      var count = $(".select_client:checked").length;
+      $("#hidden_client_count").val(count);
+      if(count > 100)
+      {
+        var alertshown = $("#show_alert").val();
+        if(alertshown == "")
+        {
+            alert("Please note that only 100 records can be exported into the PDF at a time hence the next set of records will be downloaded in another PDF and so on.");
+            $("#show_alert").val("1");
+        }
+      }
+    }
+    else{
+      $("#select_all_class").prop("checked",false);
+      var classid = $(e.target).val();
+      $(".class_"+classid).each(function() {
+        $(this).prop("checked",false);
+      });
+    }
+
+    
+  }
+  if($(e.target).hasClass('created_email_class'))
+  {
+    if($(e.target).is(":checked"))
+    {
+      var classid = $(e.target).val();
+      $(".email_class_"+classid).each(function() {
+        $(this).prop("checked",true);
+      });
+      var fulldata = $(".select_email_client").length;
+      var fulldatachecked = $(".select_email_client:checked").length;
+      if(fulldata == fulldatachecked)
+      {
+        $("#select_all_email_class").prop("checked",true);
+      }
+    }
+    else{
+      $("#select_all_email_class").prop("checked",false);
+      var classid = $(e.target).val();
+      $(".email_class_"+classid).each(function() {
+        $(this).prop("checked",false);
+      });
+    }
+  }
+  if($(e.target).hasClass('created_import_class'))
+  {
+    if($(e.target).is(":checked"))
+    {
+      var classid = $(e.target).val();
+      $(".import_class_"+classid).each(function() {
+        $(this).prop("checked",true);
+      });
+      var fulldata = $(".select_import_client").length;
+      var fulldatachecked = $(".select_import_client:checked").length;
+      if(fulldata == fulldatachecked)
+      {
+        $("#select_all_import_class").prop("checked",true);
+      }
+    }
+    else{
+      $("#select_all_import_class").prop("checked",false);
+      var classid = $(e.target).val();
+      $(".import_class_"+classid).each(function() {
+        $(this).prop("checked",false);
+      });
+    }
+  }
+  if(e.target.id == 'show_incomplete')
+  {
+    if($(e.target).is(':checked'))
+    {
+      $(".edit_task").each(function() {
+          if($(this).hasClass('disabled'))
+          {
+            $(this).hide();
+          }
+      });
+      $.ajax({
+        url:"<?php echo URL::to('user/update_cm_incomplete_status'); ?>",
+        type:"post",
+        data:{value:1},
+        success: function(result)
+        {
+        }
+      });
+    }
+    else{
+      $(".edit_task").each(function() {
+          if($(this).hasClass('disabled'))
+          {
+            $(this).show();
+          }
+      });
+      $.ajax({
+        url:"<?php echo URL::to('user/update_cm_incomplete_status'); ?>",
+        type:"post",
+        data:{value:0},
+        success: function(result)
+        {
+        }
+      });
+    }
+  }
+  if(e.target.id == "search_button")
+  {
+    var input = $(".search_input_class").val();
+    var select = $(".search_select_class").val();
+    if(input == "" || select == "")
+    {
+      alert("Please Type the Input and choose the search type to serch the clients.");
+    }
+    else{
+      $.ajax({
+        url:"<?php echo URL::to('user/cm_search_clients'); ?>",
+        type:"get",
+        data:{input:input,select:select},
+        success: function(result) {
+          $("#clients_tbody").html(result);
+          $("#client_expand_info").hide();
+          $(".dataTables_paginate").hide();
+          if($("#show_incomplete").is(':checked'))
+          {
+            $(".edit_task").each(function() {
+                if($(this).hasClass('disabled'))
+                {
+                  $(this).hide();
+                }
+            });
+          }
+          else{
+            $(".edit_task").each(function() {
+                if($(this).hasClass('disabled'))
+                {
+                  $(this).show();
+                }
+            });
+          }
+        }
+      });
+    }
+  }
+  if($(e.target).hasClass('addclientbutton')) {
+    $(".bs-example-modal-sm").find(".editsp").hide();
+    $(".bs-example-modal-sm").find(".addsp").show();
+    $(".bs-example-modal-sm").find(".modal-title").html("Add Clients");
+  }
+  if($(e.target).hasClass('deactivate_clients'))
+  {
+    var crypt_pin = $("#edit_crypt_pin").val();
+    var client_id = $(e.target).attr("data-element");
+    if(crypt_pin != "")
+    {
+      $.ajax({
+        url:"<?php echo URL::to('user/cm_status_clients'); ?>",
+        type:"post",
+        data:{hidden_status:1,client_id:client_id,crypt_pin:crypt_pin},
+        success: function(result)
+        {
+          if(result == 1)
+          {
+            window.location.replace("<?php echo URL::to('user/client_management?deactivate=1&divid=clientidtr_'); ?>"+atob(client_id));
+          }
+          else{
+            window.location.replace("<?php echo URL::to('user/client_management?status_pin_invalid=1&divid=clientidtr_'); ?>"+atob(client_id));
+          }
+        }
+      })
+    }
+    else{
+      alert("Crypt Pin is Empty! Please Enter the Crypt Pin & Deactivate this client");
+    }
+  }
+  if($(e.target).hasClass('activate_clients'))
+  {
+    var crypt_pin = $("#edit_crypt_pin").val();
+    var client_id = $(e.target).attr("data-element");
+    if(crypt_pin != "")
+    {
+      $.ajax({
+        url:"<?php echo URL::to('user/cm_status_clients'); ?>",
+        type:"post",
+        data:{hidden_status:0,client_id:client_id,crypt_pin:crypt_pin},
+        success: function(result)
+        {
+          if(result == 1)
+          {
+            window.location.replace("<?php echo URL::to('user/client_management?activate=1&divid=clientidtr_'); ?>"+atob(client_id));
+          }
+          else{
+            window.location.replace("<?php echo URL::to('user/client_management?status_pin_invalid=1&divid=clientidtr_'); ?>"+atob(client_id));
+          }
+        }
+      })
+    }
+    else{
+      alert("Crypt Pin is Empty! Please Enter the Crypt Pin & Activate this client");
+    }
+  }
+  if($(e.target).hasClass('download_clients'))
+  {
+    $("body").addClass("loading");
+    var editid = $(e.target).attr("data-element");
+      var checkedvalue = atob(editid);
+      $.ajax({
+        url:"<?php echo URL::to('user/cm_report_pdf'); ?>",
+        type:"post",
+        data:{value:checkedvalue,type:1},
+        success: function(result)
+        {
+          $(".bs-example-modal-sm").modal("hide");
+          SaveToDisk("<?php echo URL::to('papers'); ?>/"+result,result);
+          $("body").removeClass("loading");
+        }
+      });
+  }
+  
+  if($(e.target).hasClass('print_clients'))
+  {
+    $("body").addClass("loading");
+     $("#print_image").show();
+    var editid = $(e.target).attr("data-element");
+    $.ajax({
+      url:"<?php echo URL::to('user/cm_print_details'); ?>",
+      type:"post",
+      dataType:"json",
+      data:{editid: editid},
+      success: function(result)
+      {
+        $("#print_image").css({"width":result['width'],"height":result['height']});
+        $("#print_image").html(result['htmlcontent']);
+
+        html2canvas(document.querySelector("#print_image")).then(canvas => {
+            document.body.appendChild(canvas);
+            var data = canvas.toDataURL('image/png');
+            $.ajax({
+              url:"<?php echo URL::to('user/save_image'); ?>",
+              type:"post",
+              data:{data:data},
+              success: function(result)
+              {
+                $(".bs-example-modal-sm").modal("hide");
+                $("#print_image").hide();
+                $("canvas").detach();
+                setTimeout(function(){ 
+                  $("body").removeClass("loading");
+                    $("#coupon").off("load").on("load", function() {
+                      window.print();
+                    }).attr("src", "<?php echo URL::to('uploads/print_image/photo.png'); ?>");
+                }, 3000);
+              }
+            });
+        });
+      }
+    })
+  }
+  if($(e.target).hasClass('copy_clients')) {
+    var editid = $(e.target).attr("data-element");
+    $.ajax({
+        url: "<?php echo URL::to('user/copy_cm_client') ?>"+"/"+editid,
+        dataType:"json",
+        type:"post",
+        success:function(result){
+          $(".invoice_model").modal("hide");
+           $(".bs-example-modal-sm").modal("show");
+           $(".bs-example-modal-sm").find(".modal-title").html("You are about to create a copy/clone of this client - are you sure you want to continue?");
+           $(".bs-example-modal-sm").find(".editsp").hide();
+           $(".bs-example-modal-sm").find(".addsp").show();   
+           $(".client_id_add").val(result['clientid']);
+           $(".firstname_add").val(result['firstname']);
+           $(".surname_add").val(result['surname']);
+           $(".company_add").val(result['company']);
+           $(".address1_add").val(result['address1']);
+           $(".address2_add").val(result['address2']);
+           $(".address3_add").val(result['address3']);
+           $(".address4_add").val(result['address4']);
+           $(".address5_add").val(result['address5']);
+           $(".pemail_add").val(result['email']);
+           $(".tye_add").val(result['tye']);
+           $(".class_add").val(result['active']);
+           $(".reg1_add").val(result['tax_reg1']);
+           $(".reg2_add").val(result['tax_reg2']);
+           $(".reg3_add").val(result['tax_reg3']);
+
+           $(".semail_add").val(result['email2']);
+           $(".phone_add").val(result['phone']);
+           $(".link_add").val(result['linkcode']);
+           
+           $(".cro_add").val(result['cro']);
+           $(".status_add").val(result['trade_status']);
+           $(".directory_add").val(result['directory']);
+           $("#client_id_div").show();
+           $(".client_id_add").val(result['clientid']);
+
+           <?php
+           $fields = DB::table('cm_fields')->where('status',0)->get();
+           if(count($fields))
+           {
+            foreach($fields as $fld)
+            {
+              $fieldval = $fld->name;
+              
+              if($fld->field == "2"){
+                ?>
+                if(result['<?php echo $fieldval; ?>'] == "yes")
+                {
+                  $("#<?php echo $fieldval; ?>_yes").prop("checked",true);
+                }
+                else if(result['<?php echo $fieldval; ?>'] == "no"){
+                  $("#<?php echo $fieldval; ?>_no").prop("checked",true);
+                }
+                <?php
+              }
+              else if($fld->field == "4"){
+                
+              }
+              else{
+                ?>
+                    $(".<?php echo $fieldval; ?>_add").val(result['<?php echo $fieldval; ?>']);
+                <?php
+              }
+            }
+           }
+           ?>
+      }
+    });
+  }
+  if($(e.target).hasClass('edit_client')) {
+    $("body").addClass("loading");
+    setTimeout(function(){ 
+      var editid = $(e.target).attr("id");
+      $(".copy_clients").attr("data-element", editid);
+      
+      $(".print_clients").attr("data-element", editid);
+      $(".download_clients").attr("data-element", editid);
+      $.ajax({
+          url: "<?php echo URL::to('user/edit_cm_client') ?>"+"/"+editid,
+          dataType:"json",
+          type:"post",
+          success:function(result){
+             $(".bs-example-modal-sm").modal("show");
+             $(".bs-example-modal-sm").find(".modal-title").html("Edit Client");
+             $(".bs-example-modal-sm").find(".editsp").show();
+             $(".bs-example-modal-sm").find(".addsp").hide();   
+             $(".clientid_class").val(result['clientid']);
+             $(".first_class").val(result['firstname']);
+             $(".sur_classs").val(result['surname']);
+             $(".cname_class").val(result['company']);
+             $(".address1_class").val(result['address1']);
+             $(".address2_class").val(result['address2']);
+             $(".address3_class").val(result['address3']);
+             $(".address4_class").val(result['address4']);
+             $(".address5_class").val(result['address5']);
+             $(".email_class").val(result['email']);
+             $(".tye_class").val(result['tye']);
+             $(".class_class").val(result['active']);
+             $(".tax_reg1_class").val(result['tax_reg1']);
+             $(".tax_reg2_class").val(result['tax_reg2']);
+             $(".tax_reg3_class").val(result['tax_reg3']);
+
+             $(".semail_class").val(result['email2']);
+             $(".phone_class").val(result['phone']);
+             $(".linkcode_class").val(result['linkcode']);
+
+             $(".employerno_edit").val(result['employer_no']);
+             $(".salutation_edit").val(result['salutation']);
+             
+             $(".cro_class").val(result['cro']);
+             $(".trade_status_class").val(result['trade_status']);
+             $(".directory_class").val(result['directory']);
+
+             $(".employerno_edit_class").val(result['employer_no']);
+             $(".salutation_edit_class").val(result['salutation']);
+
+             $(".id_class").val(result['id']);
+             if(result['status'] == 1)
+             {
+                $(".deactivate_clients").addClass("activate_clients");
+                $(".deactivate_clients").addClass("fa-times");
+                $(".activate_clients").removeClass("deactivate_clients");
+                $(".activate_clients").removeClass("fa-check");
+                $(".activate_clients").attr("data-element", editid);
+                $(".activate_clients").attr("title", 'Activate This Client');
+             }
+             if(result['status'] == 0)
+             {
+                $(".activate_clients").addClass("deactivate_clients");
+                $(".deactivate_clients").addClass("fa-check");
+                $(".deactivate_clients").removeClass("activate_clients");
+                $(".deactivate_clients").removeClass("fa-times");
+                $(".deactivate_clients").attr("data-element", editid);
+                $(".deactivate_clients").attr("title", 'Deactivate This Client');
+             }
+             $("#edit_clients_div").html(result['htmlcontent']);
+             $("body").removeClass("loading");
+        }
+      });
+    }, 2000);
+  }
+
+
+  if($(e.target).hasClass('invoice_class')) {
+    $("body").addClass("loading");
+
+    if (CKEDITOR.instances.editor_2) CKEDITOR.instances.editor_2.destroy();
+   
+    setTimeout(function(){ 
+        var editid = $(e.target).attr("id");
+          $(".copy_clients").attr("data-element", editid);
+          $(".print_clients").attr("data-element", editid);
+          $(".download_clients").attr("data-element", editid);
+          $.ajax({
+              url: "<?php echo URL::to('user/cm_client_invoice') ?>",
+              data:{id:editid},
+              dataType:"json",
+              type:"post",
+              success:function(result){
+                 $(".invoice_model").modal("show");
+                 $(".invoice_model").find(".editsp").show();
+                 $("#invoice_tbody").html(result['invoiceoutput']);
+                 $("#payroll_tbody").html(result['payrolloutput']);
+                 $("#timetask_tbody").html(result['timetaskoutput']);
+                 $("#bank_detail_body").html(result['outputbank']);
+                 $("#message_tbody").html(result['outputmessage']);
+                 $(".bank_client_class").val(result['bank_client_id']);
+                 
+                 $(".invoice_client_id").val(result['clientid']);
+
+                 CKEDITOR.replace('editor_2',
+                 {
+                  height: '150px',
+                 });
+
+
+               $(".clientid_class").val(result['clientid']);
+               $(".client_added_class").val(result['client_added']);
+               $(".first_class").val(result['firstname']);
+               $(".sur_classs").val(result['surname']);
+               $(".cname_class").val(result['company']);
+               $(".address1_class").val(result['address1']);
+               $(".address2_class").val(result['address2']);
+               $(".address3_class").val(result['address3']);
+               $(".address4_class").val(result['address4']);
+               $(".address5_class").val(result['address5']);
+               $(".email_class").val(result['email']);
+               $(".tye_class").val(result['tye']);
+               $(".class_class").val(result['active']);
+               $(".tax_reg1_class").val(result['tax_reg1']);
+               $(".tax_reg2_class").val(result['tax_reg2']);
+               $(".tax_reg3_class").val(result['tax_reg3']);
+
+               CKEDITOR.instances['editor_2'].setData(result['client_note']);
+               
+               $(".clientid_note").val(result['clientid']);
+
+               
+
+
+               $(".semail_class").val(result['email2']);
+               $(".phone_class").val(result['phone']);
+               $(".linkcode_class").val(result['linkcode']);
+               
+               $(".cro_class").val(result['cro']);
+               $(".trade_status_class").val(result['trade_status']);
+               $(".directory_class").val(result['directory']);
+               $(".employerno_edit_class").val(result['employer_no']);
+                 $(".salutation_edit_class").val(result['salutation']);
+               $(".id_class").val(result['id']);
+               if(result['active'] == 2)
+               {
+                  $(".deactivate_clients").addClass("activate_clients");
+                  $(".deactivate_clients").addClass("fa-times");
+                  $(".activate_clients").removeClass("deactivate_clients");
+                  $(".activate_clients").removeClass("fa-check");
+                  $(".activate_clients").attr("data-element", editid);
+                  $(".activate_clients").attr("title", 'Activate This Client');
+               }
+               else
+               {
+                  $(".activate_clients").addClass("deactivate_clients");
+                  $(".deactivate_clients").addClass("fa-check");
+                  $(".deactivate_clients").removeClass("activate_clients");
+                  $(".deactivate_clients").removeClass("fa-times");
+                  $(".deactivate_clients").attr("data-element", editid);
+                  $(".deactivate_clients").attr("title", 'Deactivate This Client');
+               }
+               $("#edit_clients_div").html(result['htmlcontent']);
+               
+           
+               $("body").removeClass("loading");
+               $('#invoice_expand').DataTable({
+                    autoWidth: true,
+                    scrollX: false,
+                    fixedColumns: false,
+                    searching: false,
+                    paging: false,
+                    info: false,
+                    order: false
+                });
+
+               $('#timetask_expand').DataTable({
+                    fixedHeader: {
+                      headerOffset: 75
+                    },
+                    autoWidth: true,
+                    scrollX: false,
+                    fixedColumns: false,
+                    searching: false,
+                    paging: false,
+                    info: false
+                });
+
+               $('#payroll_expand').DataTable({
+                  fixedHeader: {
+                    headerOffset: 75
+                  },
+                  autoWidth: true,
+                  scrollX: false,
+                  fixedColumns: false,
+                  searching: false,
+                  paging: false,
+                  info: false
+              });
+
+            $('#bank_expand').DataTable({
+                fixedHeader: {
+                  headerOffset: 75
+                },
+                autoWidth: true,
+                scrollX: false,
+                fixedColumns: false,
+                searching: false,
+                paging: false,
+                info: false
+            }); 
+            $('#message_expand').DataTable({
+                fixedHeader: {
+                  headerOffset: 75
+                },
+                autoWidth: true,
+                scrollX: false,
+                fixedColumns: false,
+                searching: false,
+                paging: false,
+                info: false
+            }); 
+
+
+
+
+          }
+        });
+     }, 2000);
+    
+  }
+
+
+  if($(e.target).hasClass('payroll_class')) {
+    var clientid = $(e.target).attr("id");
+
+    console.log(clientid);
+    
+    $.ajax({
+        url: "<?php echo URL::to('user/cm_client_payroll') ?>",
+        data:{id:clientid},
+        type:"post",
+        success:function(result){          
+           $(".payroll_model").modal("show");
+           
+    }
+  });
+  }
+
+  if(e.target.id == "save_as_csv_invoice"){
+    $("body").addClass("loading");
+    setTimeout(function(){ 
+      var editid = $(".invoice_client_id").val();
+      console.log(editid);
+      $.ajax({
+        url:"<?php echo URL::to('user/cm_invoice_report_csv'); ?>",
+        type:"post",
+        data:{value:editid},
+        success: function(result)
+        {
+          $.ajax({
+            url:"<?php echo URL::to('user/cm_get_csv_filename'); ?>",
+            type:"post",
+            data:{value:editid},
+            success: function(result)
+            {
+              SaveToDisk("<?php echo URL::to('papers'); ?>/CM_Report.csv",result);
+              $("body").removeClass("loading");
+            }
+          })
+        }
+      });
+     }, 2000);
+
+    
+    
+  }
+  if(e.target.id == "save_as_pdf_invoice"){
+     $("body").addClass("loading");
+     setTimeout(function(){ 
+        $("#report_pdf_type_two_tbody_invoice").html('');
+        var editid = $(".invoice_client_id").val();
+        $.ajax({
+          url:"<?php echo URL::to('user/cm_invoice_report_pdf'); ?>",
+          type:"post",
+          dataType:"json",
+          data:{value:editid},
+          success: function(result)
+          {
+            $(".invoice_filename").text(result['companyname']);
+            $("#report_pdf_type_two_tbody_invoice").append(result['output']);
+            
+              var pdf_html = $("#report_pdf_type_two_invoice").html();
+              $.ajax({
+                url:"<?php echo URL::to('user/cm_invoice_download_report_pdfs'); ?>",
+                type:"post",
+                data:{htmlval:pdf_html},
+                success: function(result_pdf)
+                {
+                  SaveToDisk("<?php echo URL::to('papers'); ?>/"+result_pdf,'Invoice of '+result['filename']+'.pdf');
+                  $("body").removeClass("loading");
+                }
+              });
+            
+          }
+        });
+    }, 2000);
+  }
+
+
+if($(e.target).hasClass('add_bank')){
+
+  var client_id = $(".bank_client_class").val();
+  $(".bank_modal").modal('show');
+  $("#bank_current_client_id").val(client_id);
+  $("#bank_name").val('');
+  $("#account_name").val('');
+  $("#account_number").val('');
+
+}
+
+if($(e.target).hasClass('bank_submit')){
+  $('body').addClass('loading');    
+  var current_client_id = $("#bank_current_client_id").val();
+  var bank_name = $("#bank_name").val();
+  var account_name = $("#account_name").val();
+  var account_number = $("#account_number").val();
+
+  $.ajax({
+    url:"<?php echo URL::to('user/cm_client_add_bank'); ?>",
+    type:"post",
+    data:{current_client_id:current_client_id,bank_name:bank_name,account_name:account_name,account_number:account_number},
+    dataType:"json",
+    success: function(result)
+    {
+       $('body').removeClass('loading');
+      $(".bank_modal").modal('hide');
+      $("#bank_detail_body").html(result['output']);
+      $('#bank_expand').DataTable({
+        fixedHeader: {
+          headerOffset: 75
+        },
+        autoWidth: true,
+        scrollX: false,
+        fixedColumns: false,
+        searching: false,
+        paging: false,
+        info: false
+    });
+     
+      $('[data-toggle="tooltip"]').tooltip();
+      
+    }
+  });
+
+
+}
+
+
+
+
+});
+$.ajaxSetup({async:false});
+$('#form-validation').validate({
+    rules: {
+        name : {required: true,},
+        lname : {required: true,},
+        taxnumber : {required: true,remote:"<?php echo URL::to('user/rctclient_checktax'); ?>"},
+        email : {required: true,email:true,remote:"<?php echo URL::to('user/rctclient_checkemail'); ?>"},
+    },
+    messages: {
+        name : "Client Name is Required",
+        lname : "Salutation is Required",
+        taxnumber : {
+          required : "Tax Number is Required",
+          remote : "Tax Number is already exists",
+        },
+        email : {
+          required : "Email Id is Required",
+          email : "Please Enter a valid Email Address",
+          remote : "Email Id is already exists",
+        },
+    },
+});
+
+</script>
+
+<!-- Page Scripts -->
+<script>
+$(function(){
+    $('#client_expand').DataTable({
+        fixedHeader: {
+          headerOffset: 75
+        },
+        autoWidth: true,
+        scrollX: false,
+        fixedColumns: false,
+        searching: false,
+        paging: false,
+        info: false
+    });
+});
+
+</script>
+
+
+
+
+
+@stop

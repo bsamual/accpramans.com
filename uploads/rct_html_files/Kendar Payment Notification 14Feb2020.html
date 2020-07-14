@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=8"> 					
+			
+			<title>Payment Notification Acknowledgement
+			</title>
+			
+			<!-- CSS STYLESSHEETS -->   
+			<link href="Kendar%20Payment%20Notification%2014Feb2020_files/fe_styles.css" rel="stylesheet" type="text/css" media="all">
+			<link href="Kendar%20Payment%20Notification%2014Feb2020_files/erct_print.css" rel="stylesheet" type="text/css" media="print">
+			
+			<script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/jquery-1.js"><!--
+
+//--></script>
+			<script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/jquery-ui-1.js"><!--
+
+//--></script>
+			<script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/functions.js"><!--
+
+//--></script>
+			<script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/scrollfix.js"><!--
+
+//--></script>
+			
+			<!-- Plug in the head view--><script type="text/javascript"><!--
+	
+
+	//Call functions when DOM loads.
+	$(document).ready(function() {
+			addShowHideToH2();
+			addShowHideToDiv();
+			addAjaxToRichCalendar();
+			forceCancel();
+			//addPreventDefaultToNoEnterFields();
+	});
+			
+
+//--></script><!--[if IE]>
+<script type="text/javascript">	
+
+	//Call functions when DOM loads.
+	$(document).ready(function() { 
+			addAutocompleteAttr();
+	});
+			
+</script>
+<![endif]--><script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/jsf.xhtml"><!--
+
+//--></script><script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/jquery.xhtml"><!--
+
+//--></script><script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/richfaces.xhtml"><!--
+
+//--></script><script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/richfaces-queue.xhtml"><!--
+
+//--></script><script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/richfaces-base-component.xhtml"><!--
+
+//--></script><script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/status.xhtml"><!--
+
+//--></script><script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/richfaces-event.xhtml"><!--
+
+//--></script><link rel="stylesheet" media="screen" type="text/css" href="Kendar%20Payment%20Notification%2014Feb2020_files/datagrid.css"><script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/popupPanel.xhtml"><!--
+
+//--></script><script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/popupPanelBorders.xhtml"><!--
+
+//--></script><script type="text/javascript" src="Kendar%20Payment%20Notification%2014Feb2020_files/popupPanelSizer.xhtml"><!--
+
+//--></script><link rel="stylesheet" media="screen" type="text/css" href="Kendar%20Payment%20Notification%2014Feb2020_files/popupPanel.css"></head><body class="tundra spring eRCTFrame">
+		
+										    			
+				<div id="eRCTMain">
+					<h1 class="eRCTTitle">Relevant Contracts Tax</h1>
+					   
+					<!-- Plug in the content facelet --><form id="paymentNotificationInput" name="paymentNotificationInput" method="post" action="/erct-web/erct.xhtml?execution=e10s1" enctype="application/x-www-form-urlencoded" onsubmit="javascript:return submitForm();">
+
+    	<div id="eRCTpaymentNotification">
+
+		<div class="box_outer_95">
+           	<div class="box_small_inner">
+           		<div class="noPrint">
+	               	<h2 class="green_title trigger">Payment Notification Acknowledgement
+					</h2>
+				</div>
+					<div class="print_id"><a href="#" id="paymentNotificationInput:print" name="paymentNotificationInput:print" onclick='jsf.util.chain(this,event,"window.print();","RichFaces.ajax(\"paymentNotificationInput:print\",event,{\"incId\":\"1\"} )");return false;'>Print All</a><a href="#" onclick="return myfaces.oam.submitForm('paymentNotificationInput','paymentNotificationInput:download2');" id="paymentNotificationInput:download2" class="Btn_Float_right">XML</a><span class="Btn_Float_right">&nbsp;or&nbsp;</span><a href="#" onclick="return myfaces.oam.submitForm('paymentNotificationInput','paymentNotificationInput:download1');" id="paymentNotificationInput:download1" class="Btn_Float_right">CSV</a><span class="Btn_Float_right">View/Download in&nbsp;</span>
+					</div>
+
+               	<div class="small_content" style="display:block;">
+               		<div class="noPrint">
+
+	               		<p>The following payment notifications will be input.
+	               		</p>
+	               		<p></p>
+	               		<p></p>
+	               		<p></p>
+					</div><span id="paymentNotificationInput:commonstatus"><span style="display:none" class="rf-st-start">Please Wait.....</span><span class="rf-st-stop"></span><script type="text/javascript"><!--
+new RichFaces.ui.Status("paymentNotificationInput:commonstatus")
+//--></script></span>
+
+						<div id="table_header" class="fe_table_header">
+							<div class="fe_table_col1x">Payment Notification ID</div>
+							<div class="fe_table_col2x">Sub Tax Ref</div>
+							<div class="fe_table_col3x">Sub Name</div>
+							<div class="fe_table_col4x">Date Input</div>
+							<div class="fe_table_col5x">Gross Payment</div>
+							<div class="fe_table_col6x">Net Payment</div>
+							<div class="fe_table_col7x">Deduction Amount</div>
+								<div class="fe_table_expander">&nbsp;</div>
+							<br class="clear">
+						</div><table id="paymentNotificationInput:j_id1653545773_2_32d498c5" class="rf-dg"><tbody id="paymentNotificationInput:j_id1653545773_2_32d498c5:dgb" class="rf-dg-body"><tr class="rf-dg-r"><td class="rf-dg-c">
+
+							<div id="print_da9535050" class="box_small_inner">
+									<h2 class="green_title trigger ackRow active">
+										<div class="fe_table_col1x"><p class="ackTable">9535050
+										</p></div>
+										<div class="fe_table_col2x"><p class="ackTable">3664057PH
+										</p></div>
+										<div class="fe_table_col3x"><p class="ackTable">KENDAR PLASTERING LIMITED
+										</p></div>
+										<div class="fe_table_col4x"><p class="ackTable">14/02/2020
+										</p></div>
+										<div class="fe_table_col5x"><p class="ackTable">
+											<span class="textAlignRight">6000.00</span>
+										</p></div>
+										<div class="fe_table_col6x"><p class="ackTable">
+											<span class="textAlignRight">4800.00</span>
+										</p></div>
+										<div class="fe_table_col7x"><p class="ackTable">
+											<span class="textAlignRight">1200.00</span>
+										</p></div>
+										<div class="fe_table_expander">&nbsp;</div>
+										<br class="clear">
+									</h2>
+
+								<div class="small_content" style="">
+										<p><span id="paymentNotificationInput:j_id1653545773_2_32d498c5:0:currentDate">14/02/2020</span>
+											<br><br>GRIFFIN GAUGHAN LTD: 03383042LH
+											<br><br>You have notified the Revenue Commissioners that you 
+are about to make a relevant payment of €6000.00 to the below 
+subcontractor:
+											<br><br>KENDAR PLASTERING LIMITED: 03664057PH
+											<br><br>You are hereby authorised to deduct from this 
+payment, tax at the rate of 20%, which based on a payment of €6000.00, 
+results in a tax amount of €1200.00.
+											<br><br>If you do not make this payment, you must withdraw the Payment Notification in your return for the period, or earlier.<br> <br>Revenue Commissioners.
+											<br><br>
+										</p>
+									<div id="print" class="print_id"><a href="#" id="paymentNotificationInput:j_id1653545773_2_32d498c5:0:print" name="paymentNotificationInput:j_id1653545773_2_32d498c5:0:print" onclick="jsf.util.chain(this,event,&quot;javascript:return printPaymentNotificationDA('print_da9535050');&quot;,&quot;RichFaces.ajax(\&quot;paymentNotificationInput:j_id1653545773_2_32d498c5:0:print\&quot;,event,{\&quot;incId\&quot;:\&quot;1\&quot;} )&quot;);return false;">Print</a>
+									</div>
+
+								</div>
+								<br>
+							</div></td></tr></tbody></table>
+
+              	</div>
+             </div>
+		</div>
+
+<!--  Back/OK button -->
+
+	</div><input type="hidden" name="paymentNotificationInput_SUBMIT" value="1"><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="FEmLbcITMbd+wOnLPHAi2i5HXwN/Ox96qITeDAuMxaUtMtQ5U42WBiRST1Xk/ouwEAEMw0SS3ik/42+xR73vbWiBY3OJ4FVGfveGuWz5YBpPjumxLycNMohvkdC8rdT3sin7yzGhKWA/REtaHTEdM2FT23qr3ItBg++8TliO8iEaAtWvuwk5plmDQK2mK727W2ByEqOq8MRf9Ppl"></form>
+				
+				</div>
+				
+				<br class="clear"><div id="statPane" style="visibility: hidden;"><div class="rf-pp-shade" id="statPane_shade" style="z-index:100;"><button class="rf-pp-btn" id="statPaneFirstHref"></button></div><div class="rf-pp-cntr loadingPanel" id="statPane_container" style="position: fixed; z-index:100; left:30%;top:30%;vertical-align:center;text-align:center;"><div class="rf-pp-shdw" id="statPane_shadow" style="opacity: 0.1;"></div><div class="rf-pp-cnt-scrlr" id="statPane_content_scroller"><div class="rf-pp-cnt" id="statPane_content" style="left:30%;top:30%;vertical-align:center;text-align:center;"><img id="popupLoadingImage" src="Kendar%20Payment%20Notification%2014Feb2020_files/ajax-loader.gif" alt="Saving" style="margin-right:10px;" width="20px" height="20px"><span style="font-size:1.4em;vertical-align:top;">Please wait, search in progress...</span></div></div></div><script type="text/javascript"><!--
+new RichFaces.ui.PopupPanel("statPane");
+//--></script></div>
+			
+</body></html>

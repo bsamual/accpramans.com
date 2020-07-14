@@ -1,0 +1,60 @@
+1) Invoice Search Loading
+
+2) Job Time == Done
+3) Today Date and Time == Done
+4) Break Time Calculate == Done
+5) Active job day only one. If stop active job, can create
+6) Quick job -> Active job -> Stop and Create one more active job duplicate automatic
+	Quick Job Srat time = Active Stop Time
+	Quick Job Stop Time = Active duplicate Start  time
+
+7) Total number of minutes worked for today by Ciaran : 120 Minutes
+8) Total number of hours worked for today by Ciaran : 02 Hours
+
+9) create new deactive clients select - Need altert yer or no
+
+10) User can't choose time based on start time before
+
+
+7967
+6055
+1) Invoice Search Loading
+
+2) Job Time == Done
+3) Today Date and Time == Done
+4) Break Time Calculate == Done
+5) Active job day only one. If stop active job, can create
+6) Quick job -> Active job -> Stop and Create one more active job duplicate automatic
+	Quick Job Srat time = Active Stop Time
+	Quick Job Stop Time = Active duplicate Start  time
+
+7) Total number of minutes worked for today by Ciaran : 120 Minutes
+8) Total number of hours worked for today by Ciaran : 02 Hours
+
+9) create new deactive clients select - Need altert yer or no
+
+10) User can't choose time based on start time before
+
+
+7967
+6055
+1) Invoice Search Loading
+
+2) Job Time == Done
+3) Today Date and Time == Done
+4) Break Time Calculate == Done
+5) Active job day only one. If stop active job, can create
+6) Quick job -> Active job -> Stop and Create one more active job duplicate automatic
+	Quick Job Srat time = Active Stop Time
+	Quick Job Stop Time = Active duplicate Start  time
+
+7) Total number of minutes worked for today by Ciaran : 120 Minutes
+8) Total number of hours worked for today by Ciaran : 02 Hours
+
+9) create new deactive clients select - Need altert yer or no
+
+10) User can't choose time based on start time before
+
+
+7967
+6055

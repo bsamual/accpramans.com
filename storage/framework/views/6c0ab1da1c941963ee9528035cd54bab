@@ -1,0 +1,7 @@
+<?php $__env->startSection('content'); ?>
+<div class="content_section" style="text-align:center">
+    <img src="<?php echo URL::to('assets/alert.png'); ?>"></img>
+    <h4 style="font-weight:800;margin-top:-10px">Feature Unavailable</h4>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('userheader', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,280 @@
+S.No,"Client Id","First Name","Last Name",Company,Status
+01,GBS001,"Karen & William",Kenny,"WKC Land Transport Activities Ltd","Inactive & Not Started"
+02,GBS004,Patrick,McDermott,"Inspire Control Ltd",Completed
+03,GBS006,"Gordon & Cathal",Murray,"Murray Brothers Entertainment Ltd","Inactive & Not Started"
+04,GBS007,Jesse,Mannion,"J.G. Mannion & Associates Ltd",Inprogress
+05,GBS013,"Jean & Cormac","O Gorman","Instinctive Cleaning Ltd",Completed
+06,GBS014,"Tommy & Annmarie",Ellis,"Tommy Ellis Painting & Decorating Ltd",Completed
+07,GBS015,Damien,Burke,"Damien Burke","Inactive & Not Started"
+08,GBS016,Cathal,Moylette,"MoyLette IT Services Ltd",Completed
+09,GBS017,Colm,Rogers,"One Stop Marketing Ltd",Completed
+10,GBS018,Michael,Mullin,"Curragh Construction Ltd",Inprogress
+11,GBS021,Paula,Guilfoyle,"The Professional Training Academy Ltd",Completed
+12,GBS024,Nicky,Williams,"Expeditions, Adventures and Safaris Ltd","Inactive & Not Started"
+13,GBS028,Johnny,Kenny,"Johnny Kenny Electrical Services",Completed
+14,GBS029,Aidan,Morrissey,"Aidan Morrissey Ltd",Completed
+15,GBS031,Frank,Glynn,"Frank Glynn","Inactive & Not Started"
+16,GBS034,Thomas,Mogan,"Thomas Mogan","Inactive & Not Started"
+17,GBS035,Mike,"O Rourke","Mike O Rourke",Inprogress
+18,GBS037,Kerina,Collins,"Kerina Collins","Inactive & Not Started"
+19,GBS038,Carmel,Geraghty,"Carmel Geraghty","Inactive & Not Started"
+20,GBS040,Sacra,Donnellan,"Sacra Donnellan Limited","Inactive & Not Started"
+21,GBS041,Gearoid,Connaughton,"Gearoid Connaughton","Inactive & Not Started"
+22,GBS042,"Mary & Roy",Bermingham,"Cloonasee Ltd",Inprogress
+23,GBS043,Sean,Maloney,"Sean Maloney & Associates","Inactive & Not Started"
+24,GBS046,Andrew,Ross,"Connaught Printed Labels Ltd","Inactive & Not Started"
+25,GBS047,Brian,Young,"Streamline Data Ltd","Inactive & Not Started"
+26,GBS050,Brian,Mullin,"BM Air Conditioning Ltd",Inprogress
+27,GBS052,Jacinta,Lynam,"Green Olive Catering",Inprogress
+28,GBS053,Steve,Moylan,"Steve Moylan Ltd","Inactive & Not Started"
+29,GBS054,Declan,Keane,"Declan Keane Limited",Completed
+30,GBS056,Liam,Kavanagh,"Weather Warm Insulation Ltd","Inactive & Not Started"
+31,GBS057,Mark,Dwyre,"Mark Dwyer Limited",Completed
+32,GBS061,Patrick,Folan,"Folan Driving School","Inactive & Not Started"
+33,GBS064,Brian,Connolly,"Fusion Engineering Services",Inprogress
+34,GBS065,Carolyn,Gregg,"Carolyn Gregg",Completed
+35,GBS066,David,Kelly,"The Window Doctor","Inactive & Not Started"
+36,GBS070,Elaine,Fahy,"Elaine Fahy",Completed
+37,GBS072,"James Casey","Andrew Dewdney","Armour Interactive Ltd","Inactive & Not Started"
+38,GBS073,Davy,Fleming,"Kinvara Auto Repair Ltd",Completed
+39,GBS074,John,Casserly,"Casserly Engineering Ltd",Inprogress
+40,GBS075,City,Villa,"City Villa Galway Ltd",Completed
+41,GBS076,"Gerry & Anne",Geraghty,"Geraghty Motors","Inactive & Not Started"
+42,GBS085,Derrick,Regan,"On Yer Bike Cycles","Inactive & Not Started"
+43,GBS088,Irial,Conroy,"Irial Conroy","Inactive & Not Started"
+44,GBS089,"Patrick & Rita",Creaven,"Hairmony Ltd",Completed
+45,GBS092,John,Lianeris,"Apponesis Ltd","Inactive & Not Started"
+46,GBS095,Emma,Robinson,"Emma Robinson","Inactive & Not Started"
+47,GBS097,Moira,Gleeson,"Moira Gleeson","Inactive & Not Started"
+48,GBS098,"Eddie Griffin","David Gaughan","Griffin Gaughan Ltd","Inactive & Not Started"
+49,GBS099,"Sean & Ita",Cooney,"RilMedia Teo","Inactive & Not Started"
+50,GBS103,"Mary Concilia",Whyte,"Mary Concilia Whyte","Inactive & Not Started"
+51,GBS108,Peter,Heffernan,"Peter Heffernan","Inactive & Not Started"
+52,GBS109,Jason,Lee,"Golden Rickshaw",Completed
+53,GBS110,Oliver,Maloney,"Oliver Maloney","Inactive & Not Started"
+54,GBS112,Vincent,Connolly,"ERROR CLIENT","Inactive & Not Started"
+55,GBS113,Aoife,"O Driscoll","Aoife O Driscoll Ltd","Inactive & Not Started"
+56,GBS136,"Michael & Colm","O Gaora","Michael & Colm O Gaora","Inactive & Not Started"
+57,GBS137,Colm,"O Gaora","Colm O Gaora","Inactive & Not Started"
+58,GBS138,Gweneth,"O Gaora","Gweneth O Gaora","Inactive & Not Started"
+59,GBS141,Vincent,Connolly,"Vincent Connolly","Inactive & Not Started"
+60,GBS143,Sean,Forde,"Kinvara VET Clinic","Inactive & Not Started"
+61,GBS146,Error,Error,"Error Error","Inactive & Not Started"
+62,GBS150,Joe,"Kenny (GBS357)","Joe Kenny (GBS357)",Completed
+63,GBS151,Tom,Greally,"Tom Greally","Inactive & Not Started"
+64,GBS152,Gerry,Connaughton,"Gerry Connaughton","Inactive & Not Started"
+65,GBS153,Trevor,McDonnagh,"Trevor McDonnagh","Inactive & Not Started"
+66,GBS156,"Marin & Francis",McDonnagh,"Carnmore Heavy Plant & Equipment Ltd","Inactive & Not Started"
+67,GBS158,Stephen,Kelly,"Daise Business Solutions Limited","Inactive & Not Started"
+68,GBS159,Kieran,Donoghue,"Kieran Donoghue",Completed
+69,GBS161,James,Cannon,"James Cannon","Inactive & Not Started"
+70,GBS164,Claudia,Vanoli,"French & Vanoli Ltd",Completed
+71,GBS166,Tony,Kelly,"Tony Kelly (Galway Motors)","Inactive & Not Started"
+72,GBS168,Jens,Kosak,"Jens Kosak Design Limited",Completed
+73,GBS169,Darian,"O Donoghue","ODM Energy Ltd",Inprogress
+74,GBS172,Paraic,Burke,"Paraic Burke","Inactive & Not Started"
+75,GBS173,Vincent,Small,"T.S.S. Body Builders Limited",Inprogress
+76,GBS174,John,Donnellan,"Donnellan Auto / Western Autostop Ltd","Inactive & Not Started"
+77,GBS176,Lawrence,Burke,"Lawrence Burke","Inactive & Not Started"
+78,GBS180,Lorraine,Copley,"Lorraine Copley","Inactive & Not Started"
+79,GBS181,Colin,"O Reilly","COR Heating & Plumbing","Inactive & Not Started"
+80,GBS184,Susan,Clancy,"Susan Clancy","Inactive & Not Started"
+81,GBS185,Francis,Kwong,"Francis Kwong","Inactive & Not Started"
+82,GBS186,Sean,Glynn,"Sean Glynn","Inactive & Not Started"
+83,GBS189,"Tom O Donnell","Bridget Sweeney","Burren View B&B","Inactive & Not Started"
+84,GBS191,Basil,Glynn,"Basil Glynn","Inactive & Not Started"
+85,GBS192,Brian,Carty,"Brian Carty","Inactive & Not Started"
+86,GBS193,William,Treacy,"William Treacy","Inactive & Not Started"
+87,GBS195,Declan,Roche,"Declan Roche Plant Hire Limited","Inactive & Not Started"
+88,GBS196,Alan,Hickey,"A.H. Drives & Controls Ltd",Completed
+89,GBS198,Gerard,Hobson,"Atlas Audio Visual Ltd",Completed
+90,GBS199,Stephen,Molloy,"SMD Cad Design Services Ltd",Completed
+91,GBS202,"Mike Fitzgerald","Kevin Hayes","Croom Electrical Contracting Ltd","Inactive & Not Started"
+92,GBS203,Noel,Kelly,"Creva Agri International",Completed
+93,GBS204,Mike,Fitzgerald,"Mike Fitzgerald",Completed
+94,GBS205,Derek,Quinn,"Link Digital Innovations Limited","Inactive & Not Started"
+95,GBS206,Neil,Devane,"Neil Devane Electrical Ltd","Inactive & Not Started"
+96,GBS209,Christos,Sempos,"Digital B2B Services Ltd",Completed
+97,GBS210,Joseph,Falherty,"Joseph Falherty","Inactive & Not Started"
+98,GBS211,Derek,McDonagh,"Derek McDonagh","Inactive & Not Started"
+99,GBS212,John,Killilea,"John Killilea",Completed
+100,GBS213,Hazel,Collins,"Hazel Collins","Inactive & Not Started"
+101,GBS214,Stephen,Rowe,"Premier Wardrobes","Inactive & Not Started"
+102,GBS216,Finbar,Keaveney,"Finbar Keaveney Ltd","Inactive & Not Started"
+103,GBS218,Paraic,McDonagh,"CMD Construction Ltd",Inprogress
+104,GBS219,David,"O Hanlon","David O Hanlon","Inactive & Not Started"
+105,GBS220,Daryl,Keane,"Daryl Keane","Inactive & Not Started"
+106,GBS221,Mark,Mogan,"Gleeful Ltd","Inactive & Not Started"
+107,GBS222,Fiona,Perks,"THK Uk","Inactive & Not Started"
+108,GBS225,"Dernan & Kenneth","O Toole","O2L's Ltd","Inactive & Not Started"
+109,GBS257,Carmel,Cahill,"Tiles Bathrooms Wood Flooring Ltd","Inactive & Not Started"
+110,GBS258,Richard,McWalter,"Richard McWalter Limited",Completed
+111,GBS262,David,Harty,"David Harty Limited",Completed
+112,GBS264,Tommy,Costello,"Tommy Costello Electrical","Inactive & Not Started"
+113,GBS265,Michael,Higgins,"Michael Higgins","Inactive & Not Started"
+114,GBS266,"Davey Faherty","Ciaran O Raghallaigh","Fanalytics Limited","Inactive & Not Started"
+115,GBS267,Simon,"Moran (MTO)","Simon Moran (MTO)","Inactive & Not Started"
+116,GBS268,Neil,Harte,"Areevay Limited","Inactive & Not Started"
+117,GBS269,Kevin,Hayes,"Kevin Hayes",Completed
+118,GBS270,Brendan,"Faherty (MTO)","Brendan Faherty (MTO)","Inactive & Not Started"
+119,GBS272,"Emmet & Eilis",Broderick,"Emmet & Eilis Broderick","Inactive & Not Started"
+120,GBS274,Patrick,Brannelly,"Brannelly Logistics Limited",Inprogress
+121,GBS275,Thomas,"Lenoard (MTO)","Thomas Lenoard (MTO)","Inactive & Not Started"
+122,GBS276,William,Davenport,"Robustahealth Limited","Inactive & Not Started"
+123,GBS278,Kirk,Donohue,"Kirk Donohue","Inactive & Not Started"
+124,GBS279,Valerie,Morriss,"Valerie Morriss","Inactive & Not Started"
+125,GBS280,David,"Hughes (MTO)","David Hughes (MTO)","Inactive & Not Started"
+126,GBS281,Sean,"Mulvey (MTO)","Sean Mulvey (MTO)","Inactive & Not Started"
+127,GBS282,"Declan & Blanaid",McKeown,"Declan & Blanaid McKeown","Inactive & Not Started"
+128,GBS283,Diarmuid,"Murphy (MTO)","Diarmuid Murphy (MTO)","Inactive & Not Started"
+129,GBS284,Hugh,"McCallum (MTO)","Hugh McCallum (MTO)","Inactive & Not Started"
+130,GBS285,Finian,"Fallon (MTO)","Finian Fallon (MTO)","Inactive & Not Started"
+131,GBS289,Peter,Jenson,"Burg Wachter UK Ltd (Sterling Locks)","Inactive & Not Started"
+132,GBS292,Pearce,Conway,"Pearce Conway","Inactive & Not Started"
+133,GBS294,Noel,McWalter,"Noel McWalter Limited",Completed
+134,GBS295,Martin,Brannelly,"Martin Brannelly","Inactive & Not Started"
+135,GBS296,John,Cunningham,"John Cunningham","Inactive & Not Started"
+136,GBS297,Bjorn,Rikhof,"Host Boi Energy UK Limited","Inactive & Not Started"
+137,GBS300,James,"O Toole","James O Toole Motors Limited",Completed
+138,GBS301,"Alessandro Pasqua","Rossana Caira","Italian Life Style","Inactive & Not Started"
+139,GBS302,"Paul & Catherine","O Donnell","Paul & Catherine O Donnell","Inactive & Not Started"
+140,GBS306,Padraic,"O Reilly","Padraic O Reilly","Inactive & Not Started"
+141,GBS309,Noel,McDonagh,"Errigal Transport Limited","Inactive & Not Started"
+142,GBS312,Martin,Mangan,"Martin Mangan",Completed
+143,GBS313,"Shane Tighe and","Brian McMenamin","Bishop O Donnell Road Mngt Co Ltd","Inactive & Not Started"
+144,GBS314,"Lester McNamara","Peter Gilhooley","Willows (Athenry) Management Company Ltd","Inactive & Not Started"
+145,GBS315,Shane,Sullivan,"Secure 4U Fire & Security Limited",Completed
+146,GBS316,"Jan Leanen","Cedric Van Besauw","Berry Lane Garden","Inactive & Not Started"
+147,GBS317,Philip,Delaney,"Philip Delaney",Completed
+148,GBS318,John,Forde,"Mac Giollarnaith Limited",Completed
+149,GBS319,"Patrick McDermott","Artur Leonowicz","EZ Stock Control Limited",Completed
+150,GBS320,Brian,Flaherty,"Brian Flaherty",Completed
+151,GBS322,"Maria Matta","Rossana Caira","Alex & Alex Lifestyle Ltd","Inactive & Not Started"
+152,GBS323,Panagiotis,Siaperas,"Actio Animus Limited","Inactive & Not Started"
+153,GBS324,Ciaran,Guilfoyle,"MY Tax Online Ltd","Inactive & Not Started"
+154,GBS325,Michael,"O Mahoney (MTO)","Michael O Mahoney (MTO)","Inactive & Not Started"
+155,GBS326,Niamh,Coppinger,"Niamh Coppinger","Inactive & Not Started"
+156,GBS327,Helen,Herbert,"Helen Herbert","Inactive & Not Started"
+157,GBS329,Darragh,Daly,"Darragh Daly Limited","Inactive & Not Started"
+158,GBS330,Matthew,Haverty,"Matthew Haverty Limited",Completed
+159,GBS332,David,Haugh,"Haugh Family Butchers Limited","Inactive & Not Started"
+160,GBS333,Eva,Burke,"Eva Burke","Inactive & Not Started"
+161,GBS335,Colin,"O Rourke","Colin O Rourke","Inactive & Not Started"
+162,GBS336,Marion,"Murphy Wallace (MTO)","Marion Murphy Wallace (MTO)","Inactive & Not Started"
+163,GBS337,Adrian,McDonagh,"Adrian McDonagh","Inactive & Not Started"
+164,GBS338,Tom,Leonard,"Tom Leonard","Inactive & Not Started"
+165,GBS341,Fergus,"O Tauma","Fergus O Tauma","Inactive & Not Started"
+166,GBS345,Kevin,Quirke,"Kevin Quirke","Inactive & Not Started"
+167,GBS348,Kevin,Staunton,"Vandieken Limited","Inactive & Not Started"
+168,GBS349,Alan,Howley,"Alan Howley",Completed
+169,GBS351,Gary,"O Boyle","O Boyle Electrical Contracting Limited","Inactive & Not Started"
+170,GBS352,Dominic,Burke,"Dominic Burke",Completed
+171,GBS353,"Derek Quinn","Kevin Gill","Crew Cast & Performers Limited",Inprogress
+172,GBS354,Stephanie,Lawrence,"Lofbergs UK Limited","Inactive & Not Started"
+173,GBS355,Justin,Pickford,"Mitamirri Limited","Inactive & Not Started"
+174,GBS357,Joseph,Kenny,"Joseph Kenny","Inactive & Not Started"
+175,GBS360,Noel,Kelly,"Agri-Plastics (GrassieCreva) International Limited","Inactive & Not Started"
+176,GBS363,Mary,Mallon,"Brogans Bakery","Inactive & Not Started"
+177,GBS365,Marius,Dobrila,"Dobrila Marius Electrical Contracting Ltd","Inactive & Not Started"
+178,GBS368,"David & Mary",Ryan,"Ryantown Toys & Gifts",Completed
+179,GBS369,Padraig,Leonard,"Padraig Leonard",Completed
+180,GBS370,Eoin,"O Dea","Eoin O Dea","Inactive & Not Started"
+181,GBS371,"Tony Kilbane","Damian Fahy","Kilbane & Fahy Floor Screed Limited",Completed
+182,GBS373,Michael,Rowland,"Dairy Spares Limited",Completed
+183,GBS374,"Jacinta & Valentine",Lynam,"Lulu's Local Produce Limited",Inprogress
+184,GBS378,Derek,Bowens,"Derek Bowens Limited",Completed
+185,GBS380,"Barry and Veronica",McDermott,"Barry and Veronica McDermott","Inactive & Not Started"
+186,GBS383,Brian,Tofts,"Minerva I Am Ltd","Inactive & Not Started"
+187,GBS384,Deborah,Gatt,"Deborah Gatt",Completed
+188,GBS385,Enda,Fanning,"Enda Fanning","Inactive & Not Started"
+189,GBS387,Kirk,Donoghue,"TestState Limited","Inactive & Not Started"
+190,GBS388,Gavin,Murray,"Melonex Consultants Limited","Inactive & Not Started"
+191,GBS390,"Michael Brogan","Martina Monaghan","Cruinniu Na Mbad Teo",Completed
+192,GBS391,Saleem,Shanny,"Aoqod Limited","Inactive & Not Started"
+193,GBS393,"Michael John",Queally,"Doolin Brewing Company Ltd",Inprogress
+194,GBS394,Wayne,Hoban,"Easytex Aluminium",Completed
+195,GBS376,Aidan,Kelly,"Aidan Kelly","Inactive & Not Started"
+196,GBS381,"Kenneth O Connor","Suzanne Hunt","Kenneth O Connor Suzanne Hunt","Inactive & Not Started"
+197,GBS396,Andrea,Noc,"Andrea Noc",Completed
+198,GBS398,Gyorgy,Molnar,"Molanic Ltd","Inactive & Not Started"
+199,GBS399,"Michael Fitzgerald","Kevin Hayes","Fitz-Hay Electrical Contracting Limited",Completed
+200,GBS400,Brian,Conneely,"Virtual Reality World",Completed
+201,GBS402,"Joseph and Carmel",McCullagh,"Joseph and Carmel McCullagh","Inactive & Not Started"
+202,GBS403,Larry,Clarke,"Larry Clarke","Inactive & Not Started"
+203,GBS404,Cristian,Figan,"Dominic-Markus Forestry Services Ltd",Inprogress
+204,GBS406,Shane,Kavanagh,"SKElect Limited",Completed
+205,GBS407,Deidre,Connnolly,"Premier Tax Free","Inactive & Not Started"
+206,GBS408,"Anna Czarska",,"Sticky Tape Productions Limited","Inactive & Not Started"
+207,GBS411,Malcom,Furminger,"Innovative SMT Limited","Inactive & Not Started"
+208,GBS412,Kevin,Staunton,"Kevin Staunton","Inactive & Not Started"
+209,GBS413,Amanda,Brennan,"HJ Langdon & Co UK Ltd","Inactive & Not Started"
+210,GBS414,Martin,Corley,"Corley Software Solutions Ltd",Completed
+211,GBS415,Einne,Naughton,"Einne Naughton",Completed
+212,GBS416,Sanjay,Patel,"Candlestick Consultancy Limited",Inprogress
+213,GBS417,Niamh,"O Mahony","Niamh O Mahony",Completed
+214,GBS418,Grainne,Hurley,"Grainne Hurley",Completed
+215,GBS419,"Laura & Tancredi","De Lisi / La Rocca","QuicklyT Galway Ltd","Inactive & Not Started"
+216,GBS421,Artur,Leonowicz,"Artur Leonowicz","Inactive & Not Started"
+217,GBS422,Pat,Power,"Gort na Carraige Management Company","Inactive & Not Started"
+218,ABC001,First01,Last01,"First01 Last01","Inactive & Not Started"
+219,ABC003,First03,Last03,"First03 Last03","Inactive & Not Started"
+220,GBS426,Stephen,Hayes,"Diocesan Managed Dervices Limited","Inactive & Not Started"
+221,GBS428,Marius,Farcas,"Mario Delivery Service Limited","Inactive & Not Started"
+222,GBS430,Alan,Smyth,"Officeline Products PTY Ltd","Inactive & Not Started"
+223,GBS433,Liam,Carroll,"Bloom Force Limited","Inactive & Not Started"
+224,GBS434,Edward,Killian,"AK Transport Services Limited","Inactive & Not Started"
+225,GBS435,Ronan,Keane,"RK Surveys Limited",Completed
+226,GBS436,Aoibheann,Carroll,"BCR Property Consultants Limited","Inactive & Not Started"
+227,GBS437,Ray,Finleston,"Oak Ventures Limited","Inactive & Not Started"
+228,GBS438,Gary,Lawler,"Chelgar Limited","Inactive & Not Started"
+229,GBS439,Alan,Croke,"Alan Croke Transport","Inactive & Not Started"
+230,GBS440,Gary,Moore,"Gary Moore Electrical","Inactive & Not Started"
+231,GBS444,Gary,Lawler,"PSS Facilities Management Limited","Inactive & Not Started"
+232,GBS445,Ciaran,Guilfoyle,"GBS & Co IT Services Limited","Inactive & Not Started"
+233,GBS446,Tadhg,Reynolds,"Tadhg Reynolds","Inactive & Not Started"
+234,GBS447,Donal,"O Connor","Kquram Limited","Inactive & Not Started"
+235,GBS448,Mark,Dwyre,"Kinvara Swim Club","Inactive & Not Started"
+236,GBS449,Sabrina,Kosse,"Hey Car / Mobility Trader GMBH","Inactive & Not Started"
+237,GBS450,Breda,Fox,"BIA Innvator Campus Company Ltd","Inactive & Not Started"
+238,GBS451,"Clare Dillon","Daniel O Neill","Animis Labs Limited",Inprogress
+239,GBS452,Brenda,Ryan,"Brenda Ryan","Inactive & Not Started"
+240,GBS453,Breege,"O Connor","AAAMber Motors Limited","Inactive & Not Started"
+241,GBS454,Liam,Carroll,"Carrkey Limited","Inactive & Not Started"
+242,GBS455,Gary,Lawler,"Bundle Subscription Boxes Limited","Inactive & Not Started"
+243,GBS456,Gary,Lawler,"PSS Recruitment Limited","Inactive & Not Started"
+244,GBS458,Mary,Bermingham,"Mission Nature Limited","Inactive & Not Started"
+245,GBS459,Anne,Wall,"Anne Wall","Inactive & Not Started"
+246,GBS460,Breege,"O Connor","BVS Assete Rentals Limited","Inactive & Not Started"
+247,GBS461,"Julia and Christopher",Hemingway,"Julia's Lobster Truck",Inprogress
+248,GBS462,Shane,McNeill,"Ballinasloe Credit Union","Inactive & Not Started"
+249,GBS463,Caoimhe,McCarthy,"Caoimhe McCarthy",Completed
+250,GBS464,"John & Clare",Kelly,"John & Clare Kelly","Inactive & Not Started"
+251,GBS465,Barry,Hurley,"Digital Bainisteoir na Gaillimhe Teoranta","Inactive & Not Started"
+252,GBS466,Ian,Beitzel,"PEB Trading Company Limited",Inprogress
+253,GBS467,"Bernadette & Armin",Grefkes,"Drumcreehy House","Inactive & Not Started"
+254,GBS468,Claire,Davey,"America Village Apothcare Limited",Completed
+255,GBS469,David,Gannon,"Gannon Mechanical & Engineering Services Limited","Inactive & Not Started"
+256,GBS470,"Olivia & Frances",Forde,"Olivia & Frances Forde","Inactive & Not Started"
+257,GBS471,Aoibheann,Carroll,"CRB Property Consultants Limited","Inactive & Not Started"
+258,GBS472,Alan,Dziewit,"Alan Bakery Limited","Inactive & Not Started"
+259,GBS473,"Eric & Christina",Furey,"Roots Claregalway","Inactive & Not Started"
+260,GBS474,Garret,Shanley,"Garret Shanley","Inactive & Not Started"
+261,GBS475,Adrian,Fahy,"Adrian Fahy","Inactive & Not Started"
+262,GBS476,Michael,Behan,"Michael Behan","Inactive & Not Started"
+263,GBS477,"Marcella & Brian",Dillon,"Marcella & Brian Dillon","Inactive & Not Started"
+264,GBS478,Ronan,"Smith (MTO)","Ronan Smith (MTO)","Inactive & Not Started"
+265,GBS479,"Alessandro & Somencia",Malfitano,"Alessandro & Somencia Malfitano","Inactive & Not Started"
+266,GBS480,Ronan,"Skehill (MTO)","Ronan Skehill (MTO)","Inactive & Not Started"
+267,GBS481,Eoin,Farrelly,"Eoin Farrelly","Inactive & Not Started"
+268,GBS482,Richard,Kilkelly,"Airwave Technology Limited","Inactive & Not Started"
+269,GBS483,Tom,Hayes,"My Fest App Limited","Inactive & Not Started"
+270,GBS484,"Pawel Mirkowski","Robert Fraczak","Team Motor Limited","Inactive & Not Started"
+271,GBS486,James,"O Toole","James O Toole (Car Sales) Limited","Inactive & Not Started"
+272,GBS487,Brian,"Dermody (MTO)","Brian Dermody (MTO)","Inactive & Not Started"
+273,GBS488,Elana,Santos,"Just Art It",Completed
+274,GBS489,"Malcom & Susan",Rowland,"Cloverleaf Cottages Limited","Inactive & Not Started"
+275,GBS490,"Michael Rowland","Philip O Connor","O Connor Group Limited",Inprogress
+276,GBS491,Luke,Charles,"Luke Charles","Inactive & Not Started"
+277,GBS492,Michael,Rowland,"Dairy Spares Ltd (UK)","Inactive & Not Started"
+278,GBS493,"Malcolm & Susan Rowland","Colm Rogers","Cloverleaf Travel Limited","Inactive & Not Started"
+279,GBS002,Gwen,Ryan,"Ballyvaughan Bay Hop Ltd","Inactive & Not Started"

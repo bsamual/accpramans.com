@@ -1,0 +1,13 @@
+---TASK CREATED - 14-May-2020 BY Guilfoyle Ciaran AND ALLOCATED TO Bob Samual DUE BY 15-May-2020---
+Sam when click on Convert Payslips Now on the files tab the system is finding about 50 files to extract and the same 50 files are present each time
+it is converting these files over and over again and uploading them as part of the upload list over and over again
+Please fix....
+
+The attached text file is the best I could do to copy them
+but you can log in and run the tool to check
+####Bob Samual has added the following comment to this Task on 22 May 2020#### Hi Ciaran, I need to access your server in order to work on this issue. So please send me "Six Digit account verification code" that you would have received in your email.&nbsp; so that i can access your server and fix this issue.
+++++Bob Samual has allocated this task to Guilfoyle Ciaran on 22-May-2020++++
+####Guilfoyle Ciaran has added the following comment to this Task on 27 May 2020#### Gillers11aa
+++++Guilfoyle Ciaran has allocated this task to Bob Samual on 27-May-2020++++
+####Bob Samual has added the following comment to this Task on 11 Jun 2020#### dffdfdf
+++++Bob Samual has allocated this task to Guilfoyle Ciaran on 11-Jun-2020++++
