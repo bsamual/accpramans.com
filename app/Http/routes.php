@@ -1,4 +1,7 @@
 <?php
+
+
+
 /*
 
 |--------------------------------------------------------------------------
@@ -1122,6 +1125,7 @@ Route::post('/user/download_infile_report_pdf_single', 'user\InfileController@do
 
 Route::post('/user/infile_report_incomplete', 'user\InfileController@infile_report_incomplete');
 Route::post('/user/change_attachment_bpso_status', 'user\InfileController@change_attachment_bpso_status');
+Route::post('/user/infile_incomplete_status', 'user\InfileController@infile_incomplete_status');
 
 
 Route::get('/user/donot_complete_task_details/', 'user\UserController@donot_complete_task_details');

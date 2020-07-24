@@ -406,16 +406,17 @@ if(Session::has('countupdated'))
   $countupdated = Session::get('countupdated');
   $total_count = Session::get('total_count');
   $message = Session::get('message');
-
+  $client_session_id = Session::get('client_session_id');
   ?>
   <script>
-    $.colorbox({html:'<p style="text-align:center;margin-top:26px;font-size:18px;font-weight:600;color:green"><?php echo $message; ?> Files Uploaded <?php echo $countupdated; ?> of <?php echo $total_count; ?> Files successfully</p>'});
+    $.colorbox({html:'<p style="text-align:center;margin-top:26px;font-size:18px;font-weight:600;color:green"><?php echo $message; ?> Files Uploaded <?php echo $countupdated; ?> of <?php echo $total_count; ?> Files successfully</p> <p style="text-align:center;margin-top:26px;font-size:18px;font-weight:600;color:green">Do you want to view this infiles item now?</p><p style="text-align:center;margin-top:26px;font-size:18px;font-weight:600;color:green"><a href="javascript:" data-element="<?php echo URL::to('user/infile_search?client_id='.$client_session_id.''); ?>" class="common_black_button view_infiles_item">Yes</a><a href="javascript:" class="common_black_button close_colorbox">No</a></p>'});
   </script>
   <?php
 }
-elseif(Session::has('countupdated'))
+elseif(Session::has('message'))
 {
   $message = Session::get('message');
+  $client_session_id = Session::get('client_session_id');
   ?>
   <script>
     $.colorbox({html:'<p style="text-align:center;margin-top:26px;font-size:18px;font-weight:600;color:green"><?php echo $message; ?></p>'});
@@ -435,6 +436,7 @@ elseif(Session::has('countupdated'))
                   $user = DB::table('user_login')->where('id',1)->first();
                 ?>
                   <li><input type="checkbox" name="hide_inactive" class="hide_inactive" id="hide_inactive" value="1"><label for="hide_inactive" title="Hides the Inactive Clients">Hide Inactive</label></li>
+                  
                   <li><input type="checkbox" name="show_incomplete" class="show_incomplete" id="show_incomplete" value="1"><label for="show_incomplete" title="Show client who have an Incomplete Batches">Show Incomplete Only</label></li>
                   <li><a href="<?php echo URL::to('user/in_file'); ?>" style="font-size: 13px; font-weight: 500;">Basic View</a></li>
                 </ul>
@@ -996,6 +998,23 @@ if($(e.target).hasClass('sort_status'))
   ascending = ascending ? false : true;
   $('#task_body').html(sorted);
 }
+if($(e.target).hasClass('close_colorbox'))
+{
+  $.colorbox.close();
+}
+if($(e.target).hasClass('view_infiles_item'))
+{
+  var hrefval = $(e.target).attr("data-element");
+  $.ajax({
+    url:"<?php echo URL::to('user/infile_incomplete_status'); ?>",
+    type:"post",
+    data:{status:1},
+    success:function(result)
+    {
+      window.location.replace(hrefval);
+    }
+  })
+}
 if($(e.target).hasClass('create_new')) {
 
     var clientid = $(e.target).attr("data-element");
@@ -1360,6 +1379,7 @@ if($(e.target).hasClass('create_new')) {
     if($(e.target).is(":checked"))
     {
       $(".complete_cls").hide();
+      
     }
   }
 });

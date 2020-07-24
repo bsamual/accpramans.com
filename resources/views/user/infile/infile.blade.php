@@ -1044,7 +1044,11 @@ elseif(Session::has('countupdated'))
 
               <div style="float: left;">
 
-                <input type="checkbox" id="show_incomplete" <?php if($internal_search_check == 0){echo 'checked'; }else{echo '';}?> ><label for="show_incomplete">Show Incomplete Files</label>
+                <?php
+                  $user_details = DB::table('user_login')->where('id',1)->first();
+                  ?>
+
+                <input type="checkbox" id="show_incomplete" <?php if($user_details->infile_incomplete == 1) { echo 'checked'; } else{echo '';}?> ><label for="show_incomplete">Show Incomplete Files</label>
 
               </div>
 
@@ -1708,6 +1712,24 @@ $(document).ready(function () {
         info: false,
         ordering: true
     });
+
+  if($("#show_incomplete").is(':checked'))
+  {
+    $(".user_select").each(function() {
+        if($(this).hasClass('disable_class'))
+        {
+          $(this).parents('tr').hide();
+        }
+    });
+  }
+  else{
+    $(".user_select").each(function() {
+        if($(this).hasClass('disable_class'))
+        {
+          $(this).parents('tr').show();
+        }
+    });
+  }
 });
 
 $(function(){
@@ -3243,7 +3265,7 @@ $(window).click(function(e) {
           }
 
       });
-
+      var status = 1;
     }
 
     else{
@@ -3259,10 +3281,19 @@ $(window).click(function(e) {
           }
 
       });
+      var status = 0;
 
     }
 
+    $.ajax({
+      url:"<?php echo URL::to('user/infile_incomplete_status'); ?>",
+      type:"post",
+      data:{status:status},
+      success: function(result)
+      {
 
+      }
+    });
 
   }
 

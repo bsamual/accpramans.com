@@ -1203,10 +1203,10 @@ class InfileController extends Controller {
 		if(Session::has('file_attach_add'))
 		{
 			$countupdated = Db::table('in_file_attachment')->where('file_id',$file_id)->where('notes_type',0)->count();
-			return redirect::back()->with('message', 'InFiles for "'.$client_details->company.'" is Created Successfully and saved the Selection.')->with('countupdated', $countupdated)->with('total_count', $total_count);
+			return redirect::back()->with('message', 'InFiles for "'.$client_details->company.'" is Created Successfully and saved the Selection.')->with('countupdated', $countupdated)->with('total_count', $total_count)->with('client_session_id', $clientid);
 		}
 		else{
-			return redirect::back()->with('message', 'InFiles for "'.$client_details->company.'" is Created Successfully and saved the Selection.');
+			return redirect::back()->with('message', 'InFiles for "'.$client_details->company.'" is Created Successfully and saved the Selection.')->with('client_session_id', $clientid);
 		}
 		
 	}
@@ -2207,8 +2207,12 @@ class InfileController extends Controller {
 		echo json_encode(array('id' => $id, 'table_content' => $downloadfile));
 
 	}
-
-
+	public function infile_incomplete_status()
+	{
+		$status = Input::get('status');
+		$data['infile_incomplete'] = $status;
+		DB::table('user_login')->where('id',1)->update($data);
+	}
 }
 
 
