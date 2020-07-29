@@ -8155,13 +8155,6 @@ function copyToClipboard(element) {
 
 
 }
-
-
-
-
-
-
-
 $(window).click(function(e) {
   if($(e.target).hasClass('disclose_liability'))
   {
@@ -15051,6 +15044,21 @@ function doneTyping_liability (input,id) {
         }
       });
 }
+
+$(window).focusout(function(e) {
+  if($(e.target).hasClass('liability_input'))
+  {
+    var input_val = $(e.target).val();
+    var id = $(e.target).attr('data-element');
+    $.ajax({
+        url:"<?php echo URL::to('user/task_liability_update'); ?>",
+        type:"get",
+        data:{liability:input_val,id:id},
+        success: function(result) {
+        }
+      });
+  }
+});
 </script>
 
 

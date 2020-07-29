@@ -253,6 +253,34 @@
       background-image:none !important;
       color:#fff !important;
 }
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > a.dropdown-item:after {
+    content: "\f054";
+    float: right;
+}
+.dropdown-submenu > a.dropdown-item:after {
+    content: ">";
+    float: right;
+    font-weight: 800;
+    margin-right: -10px;
+}
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: 0px;
+    margin-left: 0px;
+}
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+.dropdown-menu
+{
+  width:200px;
+}
 </style>
 </head>
 <body class="body_bg">
@@ -279,13 +307,16 @@
                     <li class="<?php if($segment1 == "task_manager" || $segment1 == "taskmanager_search" || $segment1 == "task_administration") { echo "active"; } else { echo ""; } ?>"><a href="<?php echo URL::to('user/task_manager')?>">Task Manager</a></li>
                     <li class="<?php if($segment1 == "directmessaging" || $segment1 == "directmessaging_page_two" || $segment1 == "directmessaging_page_three" || $segment1 == "messageus_groups" || $segment1 == "messageus_saved_messages") { echo "active"; } else { echo ""; } ?>"><a href="<?php echo URL::to('user/directmessaging')?>">MessageUs System</a></li>
                     <li class="<?php if(($segment1 == "client_management")) { echo "active"; } else { echo ""; } ?>"><a href="<?php echo URL::to('user/client_management'); ?>">Client Mangement</a></li>
-                    <li class="<?php if(($segment1 == "invoice_management")) { echo "active"; } else { echo ""; } ?>"><a href="<?php echo URL::to('user/invoice_management'); ?>">Invoice Management</a></li>
                     <li class="<?php if(($segment1 == "aml_system")) { echo "active"; } else { echo ""; } ?>"><a href="<?php echo URL::to('user/aml_system'); ?>">AML System</a></li>
-                    <li class="<?php if(($segment1 == "client_statements")) { echo "active"; } else { echo ""; } ?>"><a href="<?php echo URL::to('user/client_statements'); ?>">Client Statements</a></li>
-                    <li class="<?php if(($segment1 == "receipt_management")) { echo "active"; } else { echo ""; } ?>"><a 
-                      href="<?php echo URL::to('user/receipt_management'); ?>">Receipt Management</a></li>
-                    
-                    
+                     <li class="dropdown-submenu <?php if($segment1 == "invoice_management" || $segment1 == "client_statements" || $segment1 == "receipt_management") { echo 'active'; } ?>">
+                        <a class="dropdown-item" tabindex="-1" href="#">Accounts</a>
+                        <ul class="dropdown-menu">
+                            <li class="<?php if(($segment1 == "client_statements")) { echo "active"; } else { echo ""; } ?>"><a href="<?php echo URL::to('user/client_statements'); ?>">Client Statements</a></li>
+                            <li class="<?php if(($segment1 == "receipt_management")) { echo "active"; } else { echo ""; } ?>"><a href="<?php echo URL::to('user/receipt_management'); ?>">Receipt Management</a></li>
+                            <li class="<?php if(($segment1 == "invoice_management")) { echo "active"; } else { echo ""; } ?>"><a href="<?php echo URL::to('user/invoice_management'); ?>">Invoice Management</a></li>
+                            <li class="<?php if(($segment1 == "client_statements")) { echo "active"; } else { echo ""; } ?>"><a href="<?php echo URL::to('user/client_statements'); ?>">Opening Balances</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li class="dropdown <?php if($segment1 == "manage_week" || $segment1 == "week_manage" || $segment1 == "select_week" || $segment1 == "manage_month" || $segment1 == "month_manage" || $segment1 == "select_month" || $segment1 == "p30" || $segment1 == "p30month_manage" || $segment1 == "p30_select_month" || $segment1 == "paye_p30month_manage" || $segment1 == "paye_p30_select_month" || $segment1 == "paye_p30_manage") { echo 'active'; } ?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Payroll Functions</a>
