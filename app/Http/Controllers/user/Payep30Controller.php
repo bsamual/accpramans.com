@@ -205,7 +205,8 @@ class Payep30Controller extends Controller {
 
 						for($i=0; $i<=11; $i++)
 						{
-							$month_liabilities = 'month_liabilities_'.$i;
+							$iii = $i+1;
+							$month_liabilities = 'month_liabilities_'.$iii;
 							for($wk=1; $wk<=53;$wk++)
 							{
 								$insertdata['week'.$wk] = '';
@@ -3306,12 +3307,15 @@ class Payep30Controller extends Controller {
 			foreach($get_rows as $row)
 			{
 				$get_task_id = DB::table('paye_p30_task')->where('paye_year',$year_id)->where('task_enumber',$row->task_enumber)->first();
-				if($task_id == "")
+				if(count($get_task_id))
 				{
-					$task_id = $get_task_id->id;
-				}
-				else{
-					$task_id = $task_id.','.$get_task_id->id;
+					if($task_id == "")
+					{
+						$task_id = $get_task_id->id;
+					}
+					else{
+						$task_id = $task_id.','.$get_task_id->id;
+					}
 				}
 			}
 		}
