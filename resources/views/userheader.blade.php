@@ -61,6 +61,7 @@
  elseif($page_segment == "ta_overview") { $title = 'T.A. System'; }
 
  elseif($page_segment == "task_manager") { $title = 'Task Manager'; }
+ elseif($page_segment == "park_task") { $title = 'Task Manager'; }
  elseif($page_segment == "taskmanager_search") { $title = 'Task Manager'; }
  elseif($page_segment == "task_administration") { $title = 'Task Manager'; }
 

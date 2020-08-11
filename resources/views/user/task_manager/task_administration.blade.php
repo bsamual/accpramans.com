@@ -384,7 +384,7 @@ input:checked + .slider:before {
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item waves-effect waves-light" style="width:15%;text-align: center">
           <a href="<?php echo URL::to('user/task_manager'); ?>" class="nav-link">
-            <spam id="open_task_count">Your Open Tasks (<?php echo count($user_tasks); ?>)</spam>
+            <spam id="open_task_count">Your Open Tasks (<?php echo count($open_task_count); ?>)</spam>
             <spam id="authored_task_count" style="display:none">Your Authored Tasks (<?php echo count($authored_task_count); ?>)</spam>
           </a>
         </li>

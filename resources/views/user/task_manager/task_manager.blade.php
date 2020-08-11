@@ -2,6 +2,7 @@
 @section('content')
 <?php
 $date = date("Y-m-d");
+$reactivate = 0;
 if(Session::has('taskmanager_user'))
 {
   $userid = Session::get('taskmanager_user');
@@ -1575,6 +1576,7 @@ input:checked + .slider:before {
 	                ?>
 	                <td colspan="4" style="text-align: center;padding:20px">No Tasks Found</td>
 	                <?php
+                  $layout.='<tr><td colspan="4" style="text-align: center;padding:20px">No Tasks Found</td></tr>';
 	              }
 	              ?>
 	            </tbody>

@@ -76,8 +76,6 @@ Route::post('/admin/update_user_setting', 'admin\AdminController@update_user_set
 
 Route::post('/admin/update_email_setting', 'admin\AdminController@update_email_setting');
 
-
-
 Route::get('/admin/manage_year', 'admin\YearController@manageyear');
 
 Route::get('/admin/deactive_year/{id?}', 'admin\YearController@deactiveyear');
@@ -1596,6 +1594,7 @@ Route::post('/user/copy_task_details', 'user\TaskmanagerController@copy_task_det
 Route::post('/user/get_taskmanager_task_files', 'user\TaskmanagerController@get_taskmanager_task_files');
 
 Route::post('/user/refresh_taskmanager', 'user\TaskmanagerController@refresh_taskmanager');
+Route::post('/user/refresh_parktask', 'user\TaskmanagerController@refresh_parktask');
 Route::post('/user/taskmanager_mark_complete', 'user\TaskmanagerController@taskmanager_mark_complete');
 Route::post('/user/taskmanager_mark_incomplete', 'user\TaskmanagerController@taskmanager_mark_incomplete');
 

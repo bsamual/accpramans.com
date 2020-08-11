@@ -66,22 +66,24 @@ class TaskmanagerController extends Controller {
 			if($userid == "")
 			{
 				$user_tasks = array();
-				$open_task_count = 0;
+				$open_task_count = array();
 				$authored_task_count = 0;
-				$park_task_count = 0;
+				$park_task_count = array();
 			}
 			else{
 				$user_tasks = DB::select("SELECT * FROM `taskmanager` WHERE `status` = '0' AND (`allocated_to` = '".$userid."' OR `author` = '".$userid."' OR `allocated_to` = '0')");
 				$open_task_count = DB::select("SELECT * FROM `taskmanager` WHERE `status` = '0' AND (`allocated_to` = '".$userid."' OR (`allocated_to` = '0' AND `author` != '".$userid."'))");
 				$authored_task_count = DB::select("SELECT * FROM `taskmanager` WHERE `status` = '0' AND `author` = '".$userid."'");
 				$park_task_count = DB::select("SELECT * FROM `taskmanager` WHERE `status` = '2' AND (`allocated_to` = '".$userid."' OR `allocated_to` = '0' OR `author` = '".$userid."')");
+
+				
 			}
 		}
 		else{
 			$user_tasks = array();
-			$open_task_count = 0;
+			$open_task_count = array();
 			$authored_task_count = 0;
-			$park_task_count = 0;
+			$park_task_count = array();
 		}
 
 
@@ -97,9 +99,9 @@ class TaskmanagerController extends Controller {
 			if($userid == "")
 			{
 				$user_tasks = array();
-				$open_task_count = 0;
+				$open_task_count = array();
 				$authored_task_count = 0;
-				$park_task_count = 0;
+				$park_task_count = array();
 			}
 			else{
 				$user_tasks = DB::select("SELECT * FROM `taskmanager` WHERE `status` = '2' AND (`allocated_to` = '".$userid."' OR `author` = '".$userid."' OR `allocated_to` = '0')");
@@ -110,9 +112,9 @@ class TaskmanagerController extends Controller {
 		}
 		else{
 			$user_tasks = array();
-			$open_task_count = 0;
+			$open_task_count = array();
 			$authored_task_count = 0;
-			$park_task_count = 0;
+			$park_task_count = array();
 		}
 
 
@@ -128,9 +130,9 @@ class TaskmanagerController extends Controller {
 			if($userid == "")
 			{
 				$user_tasks = array();
-				$open_task_count = 0;
+				$open_task_count = array();
 				$authored_task_count = 0;
-				$park_task_count = 0;
+				$park_task_count = array();
 			}
 			else{
 				$user_tasks = DB::select("SELECT * FROM `taskmanager` WHERE `status` = '0' AND (`allocated_to` = '".$userid."' OR `author` = '".$userid."' OR `allocated_to` = '0')");
@@ -141,9 +143,9 @@ class TaskmanagerController extends Controller {
 		}
 		else{
 			$user_tasks = array();
-			$open_task_count = 0;
+			$open_task_count = array();
 			$authored_task_count = 0;
-			$park_task_count = 0;
+			$park_task_count = array();
 		}
 
 		$tasks = DB::table('time_task')->where('task_type', 0)->orderBy('task_name', 'asc')->get();
@@ -158,22 +160,22 @@ class TaskmanagerController extends Controller {
 			if($userid == "")
 			{
 				$user_tasks = array();
-				$open_task_count = 0;
+				$open_task_count = array();
 				$authored_task_count = 0;
-				$park_task_count = 0;
+				$park_task_count = array();
 			}
 			else{
 				$user_tasks = DB::select("SELECT * FROM `taskmanager` WHERE `status` = '0' AND (`allocated_to` = '".$userid."' OR `author` = '".$userid."' OR `allocated_to` = '0')");
-				$open_task_count = DB::select("SELECT * FROM `taskmanager` WHERE `status` = '0' AND `author` != '".$userid."' AND (`allocated_to` = '".$userid."' OR `allocated_to` = '0')");
+				$open_task_count = DB::select("SELECT * FROM `taskmanager` WHERE `status` = '0' AND (`allocated_to` = '".$userid."' OR (`allocated_to` = '0' AND `author` != '".$userid."'))");
 				$authored_task_count = DB::select("SELECT * FROM `taskmanager` WHERE `status` = '0' AND `author` = '".$userid."'");
 				$park_task_count = DB::select("SELECT * FROM `taskmanager` WHERE `status` = '2' AND (`allocated_to` = '".$userid."' OR `allocated_to` = '0' OR `author` = '".$userid."')");
 			}
 		}
 		else{
 			$user_tasks = array();
-			$open_task_count = 0;
+			$open_task_count = array();
 			$authored_task_count = 0;
-			$park_task_count = 0;
+			$park_task_count = array();
 		}
 		$tasks = DB::table('taskmanager')->orderBy('id','desc')->offset(0)->limit(500)->get();
 

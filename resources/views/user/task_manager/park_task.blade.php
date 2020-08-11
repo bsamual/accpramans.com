@@ -891,7 +891,7 @@ input:checked + .slider:before {
         </li>
       </ul>
     </div>
-      <div class="table-responsive" style="width: 100%; float: left;margin-top:150px;">
+      <div class="table-responsive" style="width: 100%; float: left;margin-top:120px;">
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane active in" id="home" role="tabpanel" aria-labelledby="home-tab">
           <div style="width:100%;float:left; margin-top: 20px;">
@@ -1492,6 +1492,7 @@ input:checked + .slider:before {
 	                ?>
 	                <td colspan="4" style="text-align: center;padding:20px">No Tasks Found</td>
 	                <?php
+                  $layout.='<tr><td colspan="4" style="text-align: center;padding:20px">No Tasks Found</td></tr>';
 	              }
 	              ?>
 	            </tbody>
